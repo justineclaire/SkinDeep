@@ -2,8 +2,9 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Model from './pages/model';
 import Home from './pages/home';
-import Quiz from './pages/quiz';
+import Quiz from './components/quiz';
 import Profile from './pages/profile';
+import 'semantic-ui-css/semantic.min.css'
 
 function App() {
   return (

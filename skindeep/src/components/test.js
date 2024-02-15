@@ -1,7 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import Modal from "react-modal";
-import clouds from '../assets/clouds.mp4';
+import React, { useState, useEffect } from "react";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -9,17 +6,15 @@ import {
   signOut,
 } from "firebase/auth";
 import "../App.css";
+import { auth } from "../firebase";
 import { Message } from 'semantic-ui-react';
-import { auth } from "../firebase";  // Add getAuth to the import
 
-function Login() {
-
+function Test() {
   const [registerEmail, setRegisterEmail] = useState("");
   const [registerPassword, setRegisterPassword] = useState("");
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const [modalOpen, setModalOpen] = useState(false);
   const [user, setUser] = useState({});
 
   useEffect(() => {
@@ -32,8 +27,7 @@ function Login() {
       unsubscribe();
     };
   }, []);
- 
-  
+
   const register = async () => {
     try {
       const user = await createUserWithEmailAndPassword(
@@ -49,6 +43,7 @@ function Login() {
         setErrorMessage("The email address is already in use");
       } else if (error.code === "auth/invalid-email") {
         setErrorMessage("The email address is not valid.");
+         
       } else if (error.code === "auth/operation-not-allowed") {
         setErrorMessage("Operation not allowed.");
       } else if (error.code === "auth/weak-password") {
@@ -90,36 +85,11 @@ function Login() {
         setAuthMode(authMode === "signin" ? "signup" : "signin")
     }
 
-    if (user) {
-      return(
-        <div>
-          <div id='logbtn'>
-                <button ><Link to="/profile">My Profile</Link></button>
-          </div>
-        
-            
-            <div id='logbtn'>
-                <button  onClick={logout}>logout</button>
-            </div>
-        </div>
-      );
-
-    }
     if (authMode === "signin") {
       return (
         <div className="Auth-form-container">
-          <div>
-                <div id='logbtn'>
-                    <button  onClick={setModalOpen}>login here</button>
-                </div>
-             </div>
-            <Modal
-                  id='modal'
-                  isOpen={modalOpen}
-                  onRequestClose={() => setModalOpen(false)}
-                  //style={customStyles}
-              >
-            <form className="Auth-form">
+          <form className="Auth-form">
+            <div className="Auth-form-content">
               <h3 className="Auth-form-title">Sign In</h3>
               <div className="text-center">
                 Not registered yet?{" "}
@@ -152,79 +122,68 @@ function Login() {
                 <button type="button" className="btn btn-primary" onClick={login}>
                   Login
                 </button>
-                <h4> User Logged In: {user?.email}</h4>
                 {errorMessage && (
                 <Message color='red'>
                     {errorMessage}
                 </Message>
                 )}
+                <h4> User Logged In: {user?.email}</h4>
                 
               </div>
-            </form>
-          </Modal>
+            </div>
+          </form>
         </div>
       )
     }
+
     return (
         
       <div className="Auth-form-container">
-          <div>
-                <div id='logbtn'>
-                    <button  onClick={setModalOpen}>login here</button>
-                </div>
-             </div>
-            <Modal
-                  id='modal'
-                  isOpen={modalOpen}
-                  onRequestClose={() => setModalOpen(false)}
-                  
-              >
-            <form className="Auth-form">
-              <h3 className="Auth-form-title">Sign Up</h3>
-              <div className="text-center">
-                Already have an account?{" "}
-                <span className="link-primary" onClick={changeAuthMode}>
-                  Log In
-                </span>
-              </div>
-              <div className="form-group mt-3">
-                <label>Email address</label>
-                <input
-                  className='form-control mt-1'
-                  placeholder="Email..."
-                  onChange={(event) => {
-                      setRegisterEmail(event.target.value);
-                  }}
-                  />
-              </div>
-              <div className="form-group mt-3">
-                <label>Password</label>
-                <input
-                  className='form-control mt-1'
-                  type="password"
-                  placeholder="Password..."
-                  onChange={(event) => {
-                      setRegisterPassword(event.target.value);
-                  }}
-                  />
-              </div>
-              <div className="d-grid gap-2 mt-3">
-                <button type="button" className="btn btn-primary" onClick={register}>
-                  Register
-                </button>
-                <h4> User Logged In: {user?.email}</h4>
-                {errorMessage && (
+          
+        <form className="Auth-form">
+          <div className="Auth-form-content">
+            <h3 className="Auth-form-title">Sign In</h3>
+            <div className="text-center">
+              Already registered?{" "}
+              <span className="link-primary" onClick={changeAuthMode}>
+                Sign In
+              </span>
+            </div>
+            
+            <div className="form-group mt-3">
+              <label>Email address</label>
+              <input placeholder='Email...' type='email'
+                  className='form-control mt-1' onChange={(event) => setRegisterEmail(event.target.value)}/>
+            </div>
+            <div className="form-group mt-3">
+              <label>Password</label>
+              <input
+                type="password"
+                className="form-control mt-1"
+                placeholder="Password..."
+                onChange={(event) => {
+                    setRegisterPassword(event.target.value);
+                }}
+              />
+            </div>
+            {errorMessage && (
                 <Message color='red'>
                     {errorMessage}
                 </Message>
-                )}
+            )}
+            <div className="d-grid gap-2 mt-3">
+              <button type="button" className="btn btn-primary" onClick={register}>
+                Register
+              </button>
+              <h4> User Logged In: {user?.email}</h4>
                 
-              </div>
-            </form>
-          </Modal>
-        </div>
-      )
-};
+            </div>
+          </div>
+        </form>
+      </div>
+    )
+    //ahhhh
+ 
+}
 
-export default Login;
-
+export default Test;

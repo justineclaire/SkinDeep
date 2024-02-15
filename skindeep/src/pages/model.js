@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import clouds from '../assets/clouds.mp4';
+import clouds from '../components/clouds.mp4';
 import { useNavigate } from 'react-router-dom';
 
 export default function Model() {

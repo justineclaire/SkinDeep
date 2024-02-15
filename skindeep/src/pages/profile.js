@@ -1,22 +1,42 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import clouds from '../assets/clouds.mp4';
-import Login from '../assets/login';
+import clouds from '../components/clouds.mp4';
+import Login from '../components/login';
+import {
+    onAuthStateChanged,
+  } from "firebase/auth";
+import { auth } from "../firebase";  
 
 function Profile() {
 
+        const [user, setUser] = useState({})
+
+        useEffect(() => {
+                const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+                    setUser(currentUser);
+                    console.log(currentUser);
+                }); // Add a comma here
+        });
     return (
         <div className='main'>
             <video src={clouds} autoPlay loop muted/>
             <Login />
             <div className='content'>
             <div>
-            <h1>Welcome Name!</h1>
-            <p>learn more about your skincare</p>
+            
+                    {user ? (
+                        <>
+                            <h1>Welcome {user.email}!</h1>
+                            
+                        </>
+                    ) : (
+                        <>
+                            <h1>Please sign in</h1>
+                            <button><Link to="/">Return Home</Link></button>
+                        </>
+                    )}
             <div>
-                <button><Link to="/model">Check a product</Link></button>
-                <button><Link to="/quiz">Find my skin type</Link></button>
-                <button>Learn More</button>
+                
             </div>
             
         </div>
