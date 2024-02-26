@@ -40,3 +40,17 @@ video {
   right: 70px;
 
 }
+
+#selected {
+  background-color: #358dc0;
+}
+
+#unselected {
+  background-color: white;
+}
+
+#unselected:hover {
+  background-color: #2b4352;
+}
+
+

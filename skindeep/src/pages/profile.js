@@ -14,8 +14,8 @@ function Profile() {
         useEffect(() => {
                 const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
                     setUser(currentUser);
-                    console.log(currentUser);
-                }); // Add a comma here
+                    //console.log(currentUser);
+                });
         });
     return (
         <div className='main'>

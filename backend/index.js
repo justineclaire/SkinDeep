@@ -5,6 +5,7 @@ import cors from "cors"
 
 const app = express()
 app.use(cors())
+app.use(express.json())
 
 // database connections and methods
 const db = mysql.createConnection({
@@ -41,11 +42,24 @@ app.post("/issues", (req, res) => {
 
 //profile creation endpoint
 app.post("/createprof", (req, res) => {
-    const q = "INSERT INTO users (id, name, skintype, sensitive, acne, age, bright, bh, red, tex, barrier, hyper) VALUES (?)";
-    const values = req.body.quiz;   
-
-    db.query(q, [values], (err, data)=>{
-        if(err) console.log(res.json(err));
+    const q = "INSERT INTO `users`(`id`, `name`, `skintype`, ` sensitive`, `acne`, `age`, `bright`, `bh`, `red`, `tex`, `barrier`, `hyper`) VALUES (?)";
+    const info =[
+        req.body.uid,
+        req.body.name,
+        req.body.skintype,
+        req.body.sensitive,
+        req.body.acne,
+        req.body.age,
+        req.body.bright,
+        req.body.bh,
+        req.body.red,
+        req.body.tex,
+        req.body.barrier,
+        req.body.hyper
+    ] 
+    console.log(info);
+    db.query(q, [info], (err, data)=>{
+        if(err) return res.json(err);
         return res.json(data);
     });
 });
