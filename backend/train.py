@@ -63,17 +63,21 @@ df_real = pd.read_csv("test_real.csv")
 
 correct = 0
 false = 0
-header = { "combination": 0 , "dry": 0, "normal": 0, "oily": 0, "sensitive": 0, "acne": 0, "age": 0, "bright": 0, "bh": 0, "red": 0, "tex": 0, "barrier": 0, "hyper": 0}
+spec = [[0,0], [0,0], [0,0], [0,0], [0,0], [0,0], [0,0], [0,0], [0,0], [0,0], [0,0], [0,0], [0,0]]
+
 # check and print the accuracy of the model
 for i in range(len(pred_data)):
     for j in range(len(header)):
         if df_pred.iloc[i][j] == df_real.iloc[i][j]:
             correct += 1
-           
+            spec[j][0] += 1
             # print(df_pred.iloc[i][j], df_real.iloc[i][j])
         else:
             false += 1
+            spec[j][1] += 1
     
 print("Correct: ", correct)
 print("False: ", false)
 print("Accuracy: ", (correct/(correct+false))*100, "%")
+for i in range(len(header)):
+    print(header[i], ": ", (spec[i][0]/(spec[i][0]+spec[i][1]))*100, "%\n")
