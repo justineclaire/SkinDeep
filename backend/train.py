@@ -13,8 +13,8 @@ from scipy.stats import randint
 from sklearn.preprocessing import label_binarize
 
 # clean ingredients and label ingredients
-cleaning()
-label()
+# cleaning()
+# label()
 data = pd.read_csv("cosmetics.csv")
 
 # format ingredients again just in case
@@ -41,25 +41,39 @@ trainedModel = rf.fit(x_train, y_train)
 def getCols():
     return x_train.columns
 
+pred_data = []
+real_data = []
+# test the model 
+for i in range(len(y_test)):
+    pred = trainedModel.predict(x_test)
+    pred_data.append(pred[i])
+    real_data.append(y_test[i])
 
-# test the model ( Plans for future )
-#y_pred = rf.predict(x_test)
-#print(y_pred)
-#tn = 0
-#tp = 0
-#fn = 0
-#fp = 0
-# for combination skin
-# for dry skin
-# for normal skin
-# for oily skin
-# for sensitive skin
+header = ["Combination", "Dry", "Normal", "Oily", "Sensitive", "acne", "age", "bright", "bh", "red", "tex", "barrier", "hyper"]
 
-# check acne
-# check age
-# check bright
-# check bh
-# check red
-# check tex
-# check barrier
-# check hyper'''
+# add real test data and predictions to csv files
+real_data = pd.DataFrame(real_data, columns=header)
+real_data.to_csv('test_real.csv', index=False)
+
+pred_data = pd.DataFrame(pred_data, columns=header)
+pred_data.to_csv('test_pred.csv', index=False)
+
+df_pred = pd.read_csv("test_pred.csv")
+df_real = pd.read_csv("test_real.csv")
+
+correct = 0
+false = 0
+header = { "combination": 0 , "dry": 0, "normal": 0, "oily": 0, "sensitive": 0, "acne": 0, "age": 0, "bright": 0, "bh": 0, "red": 0, "tex": 0, "barrier": 0, "hyper": 0}
+# check and print the accuracy of the model
+for i in range(len(pred_data)):
+    for j in range(len(header)):
+        if df_pred.iloc[i][j] == df_real.iloc[i][j]:
+            correct += 1
+           
+            # print(df_pred.iloc[i][j], df_real.iloc[i][j])
+        else:
+            false += 1
+    
+print("Correct: ", correct)
+print("False: ", false)
+print("Accuracy: ", (correct/(correct+false))*100, "%")

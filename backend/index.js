@@ -21,6 +21,16 @@ app.get("/", (req, res) => {
     res.json("hello this is the backend")
 })
 
+app.get("/user/:uid", (req, res) => {
+    const q = "SELECT * FROM `users` WHERE `id` = ?";
+    const uid = req.params.uid;
+    //console.log(req.params.uid);
+    db.query(q, uid, (err, data)=>{
+        if(err) return res.json(err);
+        return res.json(data);
+    })
+})
+
 //set up database queries endpoint
 app.get("/issues", (req, res) => {
     const q = "SELECT * FROM skinIssues";
