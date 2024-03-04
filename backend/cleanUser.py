@@ -4,6 +4,12 @@ def cleanUser(cos):
     
     for ing in cos:
             ing = ing.lower()
+            if 'tocopheryl' in ing or 'tocopherol' in ing or 'vitamine' in ing or 'vitamin e' in ing:
+                ing = 'vite'
+            if ',' in ing:
+                ing.replace(',', '')
+            if '100%' in ing or '100percent' in ing:
+                ing = ''
             if 'glycerin' in ing:
                 ing = 'glycerin'
             if 'retinol' in ing:
@@ -86,6 +92,46 @@ def cleanUser(cos):
                 ing = 'sunflower'
             if 'lavandula angustifolia' in ing or 'lavender' in ing:
                 ing = 'lavender'
+            if 'capric triglyceride' in ing or 'capric triglyceride' in ing or 'linoleic triglyceride' in ing:
+                ing = 'capric triglyceride'
+            if 'ceramide' in ing:
+                ing = 'ceramide'
+            if 'green tea' in ing:
+                ing = 'greentea'
+            if 'oatmeal' in ing or 'avena sativa' in ing:
+                ing = 'oatmeal'
+            if 'zizyphus' in ing or 'jujube' in ing:
+                ing = 'jujube'
+            if 'rosehip' in ing:
+                ing = 'rosehip'
+            if 'bentonite' in ing:
+                ing = 'bentonite'
+            if 'propolis' in ing or 'honey' in ing:
+                ing = 'honey'
+            if 'zinc oxide' in ing:
+                ing = 'zinc oxide'
+            if 'apricot kernel' in ing:
+                ing = 'apricot kernel'
+            if 'olive' in ing:
+                ing = 'olive'
+            if 'almond' in ing:
+                ing = 'almond'
+            if 'argan' in ing: 
+                ing = 'argan'
+            if 'oxybenzone' in ing:
+                ing = 'oxybenzone'
+            if '*' in ing:
+                ing.replace('*', '')
+            if 'centella asiatica' in ing:
+                ing = 'centella asia'
+            if 'tartaric' in ing:
+                ing = 'tartaric'
+            if '2hexadaniol' in ing or '12hexanediol' in ing or '2hexandiol' in ing:
+                ing = '12hexanediol'
+            if 'algae' in ing:
+                ing = 'algae'
+            if 'superoxide' in ing:
+                ing = 'superoxidedis'
             # remove preservatives
             if 'sodium benzoate' in ing:
                 ing = ''

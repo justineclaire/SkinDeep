@@ -7,15 +7,13 @@ from cleanIng import cleaning
 from label import label
 # Modelling
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import multilabel_confusion_matrix, accuracy_score, confusion_matrix, average_precision_score, recall_score, ConfusionMatrixDisplay, classification_report
-from sklearn.model_selection import RandomizedSearchCV, train_test_split
-from scipy.stats import randint
-from sklearn.preprocessing import label_binarize
+from sklearn.model_selection import train_test_split
+import joblib
 
 # clean ingredients and label ingredients
-# cleaning()
-# label()
-data = pd.read_csv("cosmetics.csv")
+cleaning()
+label()
+data = pd.read_csv("cosmetics_mod.csv")
 
 # format ingredients again just in case
 data["Ingredients"] = data["Ingredients"].str.replace("[*()\s.+-]", "", regex=True)
@@ -24,6 +22,9 @@ data["Ingredients"] = data["Ingredients"].str.lower()
 # One-Hot Encoding
 ingredients_dummies=data["Ingredients"].str.get_dummies(',')
 encoded_columns = ingredients_dummies.columns.tolist()
+
+ingtest = pd.DataFrame(ingredients_dummies, columns=encoded_columns)
+ingtest.to_csv('ingredients.csv', index=False)
 
 # Drop the columns that are not labels
 columns_to_drop = ["Label", "Ingredients", "Brand", "Name", "Price", "Rank"]
@@ -78,6 +79,9 @@ for i in range(len(pred_data)):
     
 print("Correct: ", correct)
 print("False: ", false)
-print("Accuracy: ", (correct/(correct+false))*100, "%")
+print("Accuracy: ", (correct/(correct+false))*100, "% \n")
 for i in range(len(header)):
-    print(header[i], ": ", (spec[i][0]/(spec[i][0]+spec[i][1]))*100, "%\n")
+    print(header[i], ": ", (spec[i][0]/(spec[i][0]+spec[i][1]))*100, "%")
+
+# Save model using joblib
+joblib.dump(trainedModel, 'model.joblib')
