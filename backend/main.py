@@ -1,21 +1,34 @@
 import sys
 import numpy as np
 import pandas as pd
-from train import trainedModel
-from train import encoded_columns
+# from train import trainedModel
+# from train import encoded_columns
 from cleanUser import cleanUser
-from train import getCols
-
+# from train import getCols
+import joblib
 '''Predicts skin concerns based on user inputted ingredients'''
 
 ingredients = sys.argv[1]
+
 # clean user input
 ingredients = ingredients.lower()
 ings = ingredients.split(",")
 ings = cleanUser(ings)
 
+# Load model using joblib
+model_joblib = joblib.load('model.joblib')
+
 # encode user input based on training data list of ingredients
 input = np.array([], dtype=int)
+
+# format ingredients again just in case and get column headings
+data = pd.read_csv("cosmetics_mod.csv")
+data["Ingredients"] = data["Ingredients"].str.replace("[*()\s.+-]", "", regex=True)
+data["Ingredients"] = data["Ingredients"].str.lower()
+
+# One-Hot Encoding
+ingredients_dummies=data["Ingredients"].str.get_dummies(',')
+encoded_columns = ingredients_dummies.columns.tolist()
 for ing in encoded_columns:
     if ing in ings:
         input = np.append(input, 1)
@@ -25,11 +38,12 @@ for ing in encoded_columns:
 input = np.array([input])
 
 # get columns from training data
-cols = getCols()
+
+cols = encoded_columns
 input_df = pd.DataFrame(input, columns=cols)
 
 # predict
-pred = trainedModel.predict(input_df)
+pred = model_joblib.predict(input_df)
 
 # send data back to node
 print(pred)

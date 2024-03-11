@@ -2,7 +2,7 @@ import express from "express"
 import mysql from "mysql"
 import { spawn } from 'child_process';
 import cors from "cors"
-
+import recs from "./recs.js";
 const app = express()
 app.use(cors())
 app.use(express.json())
@@ -31,6 +31,25 @@ app.get("/user/:uid", (req, res) => {
     })
 })
 
+app.get("/recs/:uid", (req, res) => {
+    const q = "SELECT * FROM `products`";
+    const uid = req.params.uid;
+    const q2 = "SELECT * FROM `users` WHERE `id` = ?";
+
+    db.query(q, (err, data)=>{
+        if(err) return res.json(err);
+        const prods = data;
+
+        db.query(q2, uid, (err, data) => {
+            if(err) return res.json(err);
+            const user = data;
+
+            const reclist = recs(prods, user);
+            return res.json(reclist);
+        });
+    })
+})
+
 //set up database queries endpoint
 app.get("/issues", (req, res) => {
     const q = "SELECT * FROM skinIssues";
@@ -52,7 +71,7 @@ app.post("/issues", (req, res) => {
 
 //profile creation endpoint
 app.post("/createprof", (req, res) => {
-    const q = "INSERT INTO `users`(`id`, `name`, `skintype`, ` sensitive`, `acne`, `age`, `bright`, `bh`, `red`, `tex`, `barrier`, `hyper`) VALUES (?)";
+    const q = "INSERT INTO `users`(`id`, `name`, `skintype`, `sensitive`, `acne`, `age`, `bright`, `bh`, `red`, `tex`, `barrier`, `hyper`) VALUES (?)";
     const info =[
         req.body.uid,
         req.body.name,
@@ -78,7 +97,7 @@ app.post("/createprof", (req, res) => {
 //predictor model endpoint
 app.post("/predict", (req, res) => {
     const arg1 = req.body.ingredients;
-    console.log(arg1);
+    
     const pythonProcess = spawn('python',["./main.py", arg1]);
     pythonProcess.stdout.on('data', (data) => {
         console.log(data.toString());

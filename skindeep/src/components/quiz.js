@@ -85,7 +85,6 @@ function Quiz() {
     }
 
     
-
 return (
     <div className='main'>
         <video src={clouds} autoPlay loop muted/>

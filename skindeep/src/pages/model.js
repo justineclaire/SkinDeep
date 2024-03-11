@@ -14,8 +14,10 @@ export default function Model() {
         e.preventDefault();
         setLoading(true);
         try {
+            console.log("calling the model now", ing)
             //call predictor model
             const response = await axios.post('http://localhost:8800/predict', ing)
+            console.log(response.data);
             //parse response
             setPred(processPred(response.data));
             setIng({ ingredients: '' });
