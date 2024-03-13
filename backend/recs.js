@@ -127,5 +127,9 @@ export default function recs(prods, user) {
         prods[i].score =(prods[i].Sens * weights.Sens) + (prods[i].acne * weights.acne) + (prods[i].age * weights.age) + (prods[i].bright * weights.bright) + (prods[i].bh * weights.bh) + (prods[i].red * weights.red) + (prods[i].tex * weights.tex) + (prods[i].barrier * weights.barrier) + (prods[i].hyper * weights.hyper) + (prods[i].Oily * weights.Oily) + (prods[i].Dry * weights.Dry) + (prods[i].Combi * weights.Combination) + (prods[i].Normal * weights.Normal);
     }
 
-    return {id: user[0], prod101: prods[543]};
+    prods = prods.sort((a, b) => {
+        return b.score - a.score;
+    });
+
+    return prods.slice(0, 5);
 }

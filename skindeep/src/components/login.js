@@ -7,6 +7,7 @@ import {
   signInWithEmailAndPassword,
   onAuthStateChanged,
   signOut,
+  updateProfile
 } from "firebase/auth";
 import "../App.css";
 import { Message } from 'semantic-ui-react';
@@ -16,6 +17,7 @@ function Login() {
 
   const [registerEmail, setRegisterEmail] = useState("");
   const [registerPassword, setRegisterPassword] = useState("");
+  const [registerUsername, setRegisterUsername] = useState("");
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -28,19 +30,27 @@ function Login() {
       //console.log(currentUser);
     });
 
+
     return () => {
       unsubscribe();
     };
   }, []);
- 
-  
+
+
   const register = async () => {
     try {
-      const user = await createUserWithEmailAndPassword(
+      const user = createUserWithEmailAndPassword(
         auth,
         registerEmail,
         registerPassword
-      );
+      ).then((UserCredentialImpl) => {
+      if (UserCredentialImpl.user) {
+        updateProfile(UserCredentialImpl.user, {
+          displayName: registerUsername
+        });
+
+        console.log(UserCredentialImpl.user);
+      }});
       console.log(user);
       setErrorMessage('');
     } catch (error) {
@@ -187,6 +197,17 @@ function Login() {
                 <span className="link-primary" onClick={changeAuthMode}>
                   Log In
                 </span>
+              </div>
+              <div className="form-group mt-3">
+                <label>Name</label>
+                <input
+                  className='form-control mt-1'
+                  placeholder="Username..."
+                  type="text"
+                  onChange={(event) => {
+                      setRegisterUsername(event.target.value);
+                  }}
+                  />
               </div>
               <div className="form-group mt-3">
                 <label>Email address</label>

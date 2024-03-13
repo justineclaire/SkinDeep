@@ -42,8 +42,8 @@ function Profile() {
             
                     {user ? (
                         <>
-                            <h1>Welcome {user.email}!</h1>
-                            <p>You have {skintype} skin</p>
+                            <h1>Welcome {user.displayName}!</h1>
+                            <p>You have {skintype ? skintype: "cool"} skin</p>
                             
                         </>
                     ) : (

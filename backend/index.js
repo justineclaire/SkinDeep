@@ -71,10 +71,9 @@ app.post("/issues", (req, res) => {
 
 //profile creation endpoint
 app.post("/createprof", (req, res) => {
-    const q = "INSERT INTO `users`(`id`, `name`, `skintype`, `sensitive`, `acne`, `age`, `bright`, `bh`, `red`, `tex`, `barrier`, `hyper`) VALUES (?)";
+    const q = "INSERT INTO `users` (id, skintype, sens, acne, ageing, bright, bh, red, tex, barrier, hyper, name) VALUES (?)";
     const info =[
         req.body.uid,
-        req.body.name,
         req.body.skintype,
         req.body.sensitive,
         req.body.acne,
@@ -84,9 +83,11 @@ app.post("/createprof", (req, res) => {
         req.body.red,
         req.body.tex,
         req.body.barrier,
-        req.body.hyper
+        req.body.hyper,
+        req.body.name
     ] 
-    console.log(info);
+    console.log(req.body.skintype);
+    console.log(q);
     db.query(q, [info], (err, data)=>{
         if(err) return res.json(err);
         return res.json(data);

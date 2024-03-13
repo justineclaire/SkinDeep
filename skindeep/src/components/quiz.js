@@ -33,7 +33,9 @@ function Quiz() {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
         setUser(currentUser);
         if (currentUser) {
-            setUserResponses({...userResponses, uid: currentUser.uid});
+            //setUserResponses({...userResponses, uid: currentUser.uid});
+            setUserResponses({...userResponses, uid: currentUser.uid, name: currentUser.displayName});
+            console.log(currentUser.displayName);
         }
         });
 
