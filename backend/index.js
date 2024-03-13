@@ -31,6 +31,7 @@ app.get("/user/:uid", (req, res) => {
     })
 })
 
+//get product recommendations
 app.get("/recs/:uid", (req, res) => {
     const q = "SELECT * FROM `products`";
     const uid = req.params.uid;
