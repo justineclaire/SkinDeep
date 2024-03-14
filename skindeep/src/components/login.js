@@ -123,7 +123,7 @@ function Login() {
                     <Button  onClick={setModalOpen}>login here</Button>
                 </div>
              </div>
-            <Modal
+            <Modal animation={false}
                   id='modal'
                   isOpen={modalOpen}
                   onRequestClose={() => setModalOpen(false)}

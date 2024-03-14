@@ -17,7 +17,13 @@ export default function recs(prods, user) {
         hyper: 1
     }
 
-    weights[user[0].skintype] = 3;
+    try{
+        weights[user[0].skintype] = 3;
+    } catch {
+        
+        return "User not found";
+    }
+    
 
     if(user[0].skinype === "Oily") {
         //user direct input

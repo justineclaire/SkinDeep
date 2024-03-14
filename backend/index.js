@@ -26,7 +26,7 @@ app.get("/user/:uid", (req, res) => {
     const uid = req.params.uid;
     //console.log(req.params.uid);
     db.query(q, uid, (err, data)=>{
-        if(err) return res.json(err);
+        if(err) return res.json("error can't find user, do the quiz!");
         return res.json(data);
     })
 })
@@ -41,12 +41,19 @@ app.get("/recs/:uid", (req, res) => {
         if(err) return res.json(err);
         const prods = data;
 
+        
         db.query(q2, uid, (err, data) => {
             if(err) return res.json(err);
             const user = data;
-
-            const reclist = recs(prods, user);
-            return res.json(reclist);
+            //console.log(user);
+            try {
+                const reclist = recs(prods, user);
+                return res.json(reclist);
+            } catch (error) {
+                console.log("Error: ", error);
+                return res.json({ error: "An error occurred" });
+            }
+            
         });
     })
 })
