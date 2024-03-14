@@ -24,6 +24,9 @@ function Profile() {
                 setUsername(currentUser.displayName);
                 setUser(currentUser);
                 
+                if(currentUser === null) {
+                    setUser(null);
+                }
             });
 
             // Return the unsubscribe function to clean up the subscription
@@ -31,9 +34,8 @@ function Profile() {
         }, []); 
        
         useEffect(() => {
-            
-            if(user) {
-                
+            try {
+                if(user) {
                     axios.get(`http://localhost:8800/user/${uid}`)
                     .then(res => {
                         if (res.data.length > 0) {
@@ -42,30 +44,34 @@ function Profile() {
                         } else {
                             setQuizTaken(false);
                         }
-                       
+                        
                     })
-                
-                
+                }
+            } catch (error) {
+                console.log(error);
             }
-        
-        }, [uid]); 
+            
+        }, [user]); 
        
 
         useEffect(() => {
-            
-            if(quiztaken) {                
-                try{
-                    axios.get(`http://localhost:8800/recs/${user.uid}`)
-                    .then(recs => {
-                        setRecList(recs.data);
-                    })
-                }catch(error) {
-                    console.log("ahhh recs axios error");
+            try {
+                if(quiztaken && user) {                
+                    try{
+                        axios.get(`http://localhost:8800/recs/${user.uid}`)
+                        .then(recs => {
+                            setRecList(recs.data);
+                        })
+                    }catch(error) {
+                        console.log("ahhh recs axios error");
+                    }
+                    
                 }
-                
+            } catch (error) {
+                console.log(error);
             }
             
-        }, [uid]); 
+        }, [user, quiztaken]); 
         
         
         
@@ -76,8 +82,9 @@ function Profile() {
             <Login />
             <div className='content'>
             <div>
+                
             
-                    {quiztaken ? (
+                    { quiztaken ? (
                         <>
                             <h1>Welcome {username}!</h1>
                             <p>You have {skintype ? skintype: "beautiful"} skin</p>
@@ -91,12 +98,14 @@ function Profile() {
 
                         </>
                     ) : (
-                        <>
+
+                        user ? (<>
                             <h1>Take our skin quiz to get product recommendations!</h1>
                             <Button><Link to="/quiz">Quiz</Link></Button>
-
-                            
-                        </>
+                        </>) : (
+                            <h1>Please log in</h1>
+                        )
+                        
                     )}
             <div>
                 

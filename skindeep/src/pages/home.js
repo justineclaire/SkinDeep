@@ -17,7 +17,7 @@ function Home() {
             <div>
                 <Button><Link to="/model">Check a product</Link></Button>
                 <Button><Link to="/quiz">Find my skin type</Link></Button>
-                <Button>Learn More</Button>
+                <Button>Search by Ingredient</Button>
             </div>
             
         </div>
