@@ -1,10 +1,7 @@
 import sys
 import numpy as np
 import pandas as pd
-# from train import trainedModel
-# from train import encoded_columns
 from cleanUser import cleanUser
-# from train import getCols
 import joblib
 '''Predicts skin concerns based on user inputted ingredients'''
 

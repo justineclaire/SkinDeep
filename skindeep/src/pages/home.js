@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import clouds from '../components/clouds.mp4';
 import Login from '../components/login';
+import Search from '../components/searchbar';
 import { Button } from 'semantic-ui-react';
 
 function Home() {
@@ -9,6 +10,7 @@ function Home() {
     return (
         <div className='main'>
             <video src={clouds} autoPlay loop muted/>
+            <Search />
             <Login />
             <div className='content'>
             <div>

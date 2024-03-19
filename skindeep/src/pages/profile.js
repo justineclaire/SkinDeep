@@ -73,9 +73,6 @@ function Profile() {
             
         }, [user, quiztaken]); 
         
-        
-        
-        
     return (
         <div className='main'>
             <video src={clouds} autoPlay loop muted/>

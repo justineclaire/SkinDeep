@@ -37,8 +37,14 @@ video {
 #profbtn {
   position: absolute;
   top: 10px;
-  right: 70px;
+  right:100px;
 
+}
+
+#search {
+  position: absolute;
+  top: 10px;
+  left: 50px;
 }
 
 #selected {
@@ -51,6 +57,10 @@ video {
 
 #unselected:hover {
   background-color: #2b4352;
+}
+
+Button {
+  color: rgb(159, 206, 248);
 }
 
 

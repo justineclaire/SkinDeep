@@ -5,6 +5,7 @@ import { ButtonGroup, Button, Message, Input  } from 'semantic-ui-react'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Login from '../components/login';
+import Search from '../components/searchbar.js'
 import {
     onAuthStateChanged,
   } from "firebase/auth";
@@ -33,7 +34,6 @@ function Quiz() {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
         setUser(currentUser);
         if (currentUser) {
-            //setUserResponses({...userResponses, uid: currentUser.uid});
             setUserResponses({...userResponses, uid: currentUser.uid, name: currentUser.displayName});
             console.log(currentUser.displayName);
         }
@@ -90,6 +90,7 @@ function Quiz() {
 return (
     <div className='main'>
         <video src={clouds} autoPlay loop muted/>
+        <Search />
         <Login />
         <div className='content'>
         { !user ? (
