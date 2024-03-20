@@ -137,5 +137,5 @@ export default function recs(prods, user) {
         return b.score - a.score;
     });
 
-    return prods.slice(0, 5);
+    return prods;
 }

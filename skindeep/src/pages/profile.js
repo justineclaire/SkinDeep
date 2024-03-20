@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import clouds from '../components/clouds.mp4';
 import Login from '../components/login';
+import Products from '../components/products';
 import {
     onAuthStateChanged,
   } from "firebase/auth";
@@ -88,9 +89,10 @@ function Profile() {
 
                             <h2>Here are some product recommendations for you:</h2>
                             <ul>
-                                {recList.map(function(product, index){
+                                {/*{recList.map(function(product, index){
                                     return <li key={index}>{product.Name}</li>
-                                })} 
+                                })}*/}
+                                <Products />
                             </ul>
 
                         </>

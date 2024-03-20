@@ -11,11 +11,11 @@ function Search() {
                 <Icon name='home' />
                 </Link>
             </Button>
-        <div class="ui icon input">
+        {/*<div class="ui icon input">
             <input class="prompt" type="text" placeholder="Search ingredients/products..."/>
-            <i class="search icon"></i>
-        </div>
-        <div class="results"></div>
+                <i class="search icon"></i>
+            </div>
+            <div class="results"></div>*/}
         </div>
     )
 
