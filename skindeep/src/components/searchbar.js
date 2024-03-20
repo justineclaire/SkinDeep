@@ -5,7 +5,7 @@ import { Button, Icon } from 'semantic-ui-react'
 
 function Search() {
     return (
-        <div id="search" class="ui right aligned category search">
+        <div id="search" className="ui right aligned category search">
             <Button icon id="homebtn">
                 <Link to="/home">
                 <Icon name='home' />

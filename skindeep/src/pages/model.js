@@ -70,7 +70,7 @@ export default function Model() {
         <div className='main'>
             <Login />
             <Search />
-            <video src={clouds} autoPlay loop muted/>
+            {/*<video src={clouds} autoPlay loop muted/>*/}
             <div className='content'>
             <form>
                 <div>{loading ? 'Loading...' : ''}</div>

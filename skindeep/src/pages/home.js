@@ -9,7 +9,7 @@ function Home() {
 
     return (
         <div className='main'>
-            <video src={clouds} autoPlay loop muted/>
+            {/*<video src={clouds} autoPlay loop muted/>*/}
             <Search />
             <Login />
             <div className='content'>
