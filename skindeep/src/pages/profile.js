@@ -50,6 +50,7 @@ function Profile() {
                 }
             } catch (error) {
                 console.log(error);
+                console.log("from profile.js")
             }
             
         }, [user]); 

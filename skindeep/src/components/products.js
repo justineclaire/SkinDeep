@@ -8,15 +8,21 @@ import axios from 'axios';
 
 function Products() {
 
+    
+
     const panes = [
-        { menuItem: 'Moisturisers', render: () => <TabPane>{moisturisers.map((moisturiser, index) => (
-            <div key={index}>
-                
-                <h3 class="id">{moisturiser.Name}</h3>
-                <p class ="brand">{moisturiser.Brand}</p>
-                
-            </div>
-        ))}</TabPane> },
+        { menuItem: 'Moisturisers', render: () => (<TabPane>
+        {loading ? (
+            <div>Loading...</div>
+        ) : (
+            moisturisers.map((moisturiser, index) => (
+                <div key={index}>
+                    <h3 class="id">{moisturiser.Name}</h3>
+                    <p class ="brand">{moisturiser.Brand}</p>
+                </div>
+            ))
+        )}
+    </TabPane>) },
 
 
 
@@ -63,6 +69,7 @@ function Products() {
     const [sunscreen, setSunscreen] = useState([]);
     const [eyecream, setEyecream] = useState([]);
     const [quiztaken, setQuizTaken] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -80,11 +87,12 @@ function Products() {
    
     useEffect(() => {
         try {
-            if(user) {
+            if(user.uid) {
                 axios.get(`http://localhost:8800/user/${uid}`)
                 .then(res => {
                     if (res.data.length > 0) {
                         setQuizTaken(true);
+                        console.log(uid)
                     } else {
                         setQuizTaken(false);
                     }
@@ -103,10 +111,10 @@ function Products() {
         try {
             if(quiztaken && user) {                
                 try{
-                    axios.get(`http://localhost:8800/recs/${user.uid}`)
+                    axios.get(`http://localhost:8800/recs/${uid}`)
                     .then(recs => {
                         setRecList(recs.data);
-                        filter();
+                        
                     })
                 }catch(error) {
                     console.log("ahhh recs axios error");
@@ -118,6 +126,13 @@ function Products() {
         
     }, [user, quiztaken]); 
 
+    useEffect(() => {
+        if (recList.length > 0) {
+            filter();
+            //console.log(recList);
+        }
+    }, [recList]);
+
     const filter = () => {
         
         let nois = recList.filter((prod) => { return prod.Label === "Moisturizer"});
@@ -127,7 +142,6 @@ function Products() {
         setToners(tone.slice(0, 5));
 
         let cleanse = recList.filter((prod) => { return prod.Label === "Cleanser"});
-
         setCleansers(cleanse.slice(0, 5));
 
         let sun = recList.filter((prod) => { return prod.Label === "Sun protect"});
@@ -135,12 +149,11 @@ function Products() {
 
         let eye = recList.filter((prod) => { return prod.Label === "Eye cream"});
         setEyecream(eye.slice(0, 5));
+
+        setLoading(false);
        
     }
-     
-    useEffect(() => {
-        //console.log(moisturisers);
-    }, [moisturisers]);
+    
     return( 
         <Tab panes={panes} />
     );

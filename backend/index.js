@@ -45,7 +45,7 @@ app.get("/recs/:uid", (req, res) => {
         db.query(q2, uid, (err, data) => {
             if(err) return res.json(err);
             const user = data;
-            //console.log(user);
+            console.log(user);
             try {
                 const reclist = recs(prods, user);
                 return res.json(reclist);
