@@ -8,7 +8,6 @@ import axios from 'axios';
 
 function Products() {
 
-    
 
     const panes = [
         { menuItem: 'Moisturisers', render: () => (<TabPane>
@@ -129,9 +128,15 @@ function Products() {
     useEffect(() => {
         if (recList.length > 0) {
             filter();
-            //console.log(recList);
+            
         }
     }, [recList]);
+
+    useEffect(() => {
+        if (!loading) {
+            getImgs();
+        }
+    }, [loading]);
 
     const filter = () => {
         
@@ -151,7 +156,24 @@ function Products() {
         setEyecream(eye.slice(0, 5));
 
         setLoading(false);
+        //getImgs();
        
+    }
+
+    const getImgs = () => {
+        let moisnames = moisturisers.map((moisturiser) => { return moisturiser.Name+moisturiser.Brand });
+        let tonernames = toners.map((toner) => { return toner.Name+toner.Brand });
+        let cleansernames = cleansers.map((cleanser) => { return cleanser.Name+cleanser.Brand });
+        let sunscreennames = sunscreen.map((sunscreen) => { return sunscreen.Name+sunscreen.Brand });
+        let eyecreamnames = eyecream.map((cream) => { return cream.Name+cream.Brand });
+        let allnames = moisnames.concat(tonernames).concat(cleansernames).concat(sunscreennames).concat(eyecreamnames);
+        
+
+        console.log(allnames);
+        axios.post(`http://localhost:8800/search`, allnames)
+        .then(res => {
+            console.log(res.data);
+        })
     }
     
     return( 

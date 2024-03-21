@@ -88,7 +88,7 @@ function Profile() {
                     { quiztaken ? (
                         <>
                             <h1>Welcome {username}!</h1>
-                            <p>You have {skintype ? skintype: "beautiful"} skin</p>
+                            <p>You have beautiful skin</p>
 
                             <h2>Here are some product recommendations for you:</h2>
                             <ul>

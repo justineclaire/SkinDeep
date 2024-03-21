@@ -3,6 +3,10 @@ import mysql from "mysql"
 import { spawn } from 'child_process';
 import cors from "cors"
 import recs from "./recs.js";
+import showimg from "./prodimgs.js";
+import fs from "fs";
+import getimgs from "./webscrapeimgs.js";
+
 const app = express()
 app.use(cors())
 app.use(express.json())
@@ -45,7 +49,7 @@ app.get("/recs/:uid", (req, res) => {
         db.query(q2, uid, (err, data) => {
             if(err) return res.json(err);
             const user = data;
-            console.log(user);
+            //console.log(user);
             try {
                 const reclist = recs(prods, user);
                 return res.json(reclist);
@@ -118,8 +122,8 @@ app.post("/predict", (req, res) => {
     });
     
 });
- 
 
 app.listen(8800, () => {
     console.log("Backend server is running!")
+    //getimgs();
 })
