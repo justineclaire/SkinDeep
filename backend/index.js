@@ -62,24 +62,6 @@ app.get("/recs/:uid", (req, res) => {
     })
 })
 
-//set up database queries endpoint
-app.get("/issues", (req, res) => {
-    const q = "SELECT * FROM skinIssues";
-    db.query(q, (err, data)=>{
-        if(err) return res.json(err);
-        return res.json(data);
-    })
-})
-
-app.post("/issues", (req, res) => {
-    const q = "INSERT INTO skinissues (issueID, issue) VALUES (?)";
-    const values = ["2", "Acne"];   
-
-    db.query(q, [values], (err, data)=>{
-        if(err) console.log(res.json(err));
-        return res.json(data);
-    });
-});
 
 //profile creation endpoint
 app.post("/createprof", (req, res) => {

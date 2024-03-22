@@ -12,6 +12,8 @@ import {
 import "../App.css";
 import { Message } from 'semantic-ui-react';
 import { auth } from "../firebase";  
+import buttonimg from './imgs/glow.png';
+import heart from './imgs/heart.png';
 
 function Login() {
 
@@ -102,14 +104,14 @@ function Login() {
 
     if (user) {
       return(
-        <div>
+        <div className='flex flex-row '>
           <div id='profbtn'>
-                <Button ><Link to="/profile">My Profile</Link></Button>
+                <button className='flex flex-row px-7 border-2 tracking-wide justify-between h-full rounded-lg bg-blue-600' ><Link to="/profile" className='flex text-white items-center'><img className='h-10 w-10'src={heart} /><span className='px-3'>My Profile</span><img className='h-10 w-10'src={heart} /></Link></button>
           </div>
         
             
             <div id='logbtn'>
-                <Button  onClick={logout}>logout</Button>
+                <button className='flex flex-row px-7 border-2 text-white tracking-wide justify-between items-center h-full rounded-lg bg-blue-600' onClick={logout}><img className='h-10 w-10'src={heart} /><span className='px-3'>Log out</span><img className='h-10 w-10'src={heart} /></button>
             </div>
         </div>
       );
@@ -120,7 +122,7 @@ function Login() {
         <div className="Auth-form-container">
           <div>
                 <div id='logbtn'>
-                    <Button  onClick={setModalOpen}>login here</Button>
+                    <button className='flex flex-row px-7 border-2 text-white tracking-wide justify-between items-center h-full rounded-lg bg-blue-600' onClick={setModalOpen}><img className='h-10 w-10'src={heart} /><span className='px-3'>Login</span><img className='h-10 w-10'src={heart} /></button>
                 </div>
              </div>
             <Modal animation={false}

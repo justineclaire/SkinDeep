@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import clouds from '../components/clouds.mp4';
 import questions from './questions.js';
 import { ButtonGroup, Button, Message, Input  } from 'semantic-ui-react'
 import { useNavigate } from 'react-router-dom';
@@ -89,7 +88,6 @@ function Quiz() {
     
 return (
     <div className='main'>
-        <video src={clouds} autoPlay loop muted/>
         <Search />
         <Login />
         <div className='content'>

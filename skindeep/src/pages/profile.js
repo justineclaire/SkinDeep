@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import clouds from '../components/clouds.mp4';
 import Login from '../components/login';
 import Search from '../components/searchbar';
 import Products from '../components/products';
@@ -78,7 +77,6 @@ function Profile() {
         
     return (
         <div className='main'>
-            {/*<video src={clouds} autoPlay loop muted/>*/}
             <Search />
             <Login />
             <div className='content'>
@@ -89,15 +87,12 @@ function Profile() {
                         <>
                             <h1>Welcome {username}!</h1>
                             <p>You have beautiful skin</p>
-
-                            <h2>Here are some product recommendations for you:</h2>
-                            <ul>
-                                {/*{recList.map(function(product, index){
-                                    return <li key={index}>{product.Name}</li>
-                                })}*/}
-                                <Products />
-                            </ul>
-
+                            <div>
+                                <h2>Here are some product recommendations for you:</h2>
+                                <ul>
+                                    <Products />
+                                </ul>
+                            </div>
                         </>
                     ) : (
 

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import clouds from '../components/clouds.mp4';
 import { useNavigate } from 'react-router-dom';
 import Search from '../components/searchbar';
 import Login from  '../components/login';
@@ -70,7 +69,6 @@ export default function Model() {
         <div className='main'>
             <Login />
             <Search />
-            {/*<video src={clouds} autoPlay loop muted/>*/}
             <div className='content'>
             <form>
                 <div>{loading ? 'Loading...' : ''}</div>

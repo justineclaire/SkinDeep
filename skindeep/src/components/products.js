@@ -16,45 +16,40 @@ function Products() {
         ) : (
             moisturisers.map((moisturiser, index) => (
                 <div key={index}>
-                    <h3 class="id">{moisturiser.Name}</h3>
-                    <p class ="brand">{moisturiser.Brand}</p>
+                    <img className="h-auto max-w-xs rounded-lg" src={moisturiser.img} alt="product" />
+                    <h3 className="text-right">{moisturiser.Name}</h3>
+                    <p className ="text-right">{moisturiser.Brand}</p>
                 </div>
             ))
         )}
     </TabPane>) },
 
-
-
         { menuItem: 'Toners', render: () => <TabPane>{toners.map((toner, index) => (
             <div key={index}>
-                
-                <h3 class="id">{toner.Name}</h3>
-                <p class ="brand">{toner.Brand}</p>
-                
+                    <img className="h-auto max-w-xs rounded-lg" src={toner.img} alt="product" />
+                    <h3 className="text-right">{toner.Name}</h3>
+                    <p className ="text-right">{toner.Brand}</p>
             </div>
         ))}</TabPane> },
         { menuItem: 'Cleansers', render: () => <TabPane>{cleansers.map((cleanser, index) => (
             <div key={index}>
-                
-                <h3 class="id">{cleanser.Name}</h3>
-                <p class ="brand">{cleanser.Brand}</p>
-                
-            </div>
+                    <img className="h-auto max-w-xs rounded-lg" src={cleanser.img} alt="product" />
+                    <h3 className="text-right">{cleanser.Name}</h3>
+                    <p className ="text-right">{cleanser.Brand}</p>
+                </div>
         ))}</TabPane> },
         { menuItem: 'Sunscreen', render: () => <TabPane>{sunscreen.map((sunscreen, index) => (
             <div key={index}>
-                
-                <h3 class="id">{sunscreen.Name}</h3>
-                <p class ="brand">{sunscreen.Brand}</p>
-                
-            </div>
+            <img className="h-auto max-w-xs rounded-lg" src={sunscreen.img} alt="product" />
+            <h3 className="text-right">{sunscreen.Name}</h3>
+            <p className ="text-right">{sunscreen.Brand}</p>
+        </div>
         ))}</TabPane> },
         { menuItem: 'Eyecream', render: () => <TabPane>{eyecream.map((cream, index) => (
             <div key={index}>
-                
-                <h3 class="id">{cream.Name}</h3>
-                <p class ="brand">{cream.Brand}</p>
-                
+                    <img className="h-auto max-w-xs rounded-lg" src={cream.img} alt="product" />
+                    <h3 className="text-right">{cream.Name}</h3>
+                    <p className ="text-right">{cream.Brand}</p>
             </div>
         ))}</TabPane>},
       ]
@@ -80,7 +75,7 @@ function Products() {
             }
         });
 
-        // Return the unsubscribe function to clean up the subscription
+        
         return unsubscribe;
     }, []); 
    
@@ -132,12 +127,6 @@ function Products() {
         }
     }, [recList]);
 
-    useEffect(() => {
-        if (!loading) {
-            getImgs();
-        }
-    }, [loading]);
-
     const filter = () => {
         
         let nois = recList.filter((prod) => { return prod.Label === "Moisturizer"});
@@ -156,25 +145,10 @@ function Products() {
         setEyecream(eye.slice(0, 5));
 
         setLoading(false);
-        //getImgs();
+       
        
     }
 
-    const getImgs = () => {
-        let moisnames = moisturisers.map((moisturiser) => { return moisturiser.Name+moisturiser.Brand });
-        let tonernames = toners.map((toner) => { return toner.Name+toner.Brand });
-        let cleansernames = cleansers.map((cleanser) => { return cleanser.Name+cleanser.Brand });
-        let sunscreennames = sunscreen.map((sunscreen) => { return sunscreen.Name+sunscreen.Brand });
-        let eyecreamnames = eyecream.map((cream) => { return cream.Name+cream.Brand });
-        let allnames = moisnames.concat(tonernames).concat(cleansernames).concat(sunscreennames).concat(eyecreamnames);
-        
-
-        console.log(allnames);
-        axios.post(`http://localhost:8800/search`, allnames)
-        .then(res => {
-            console.log(res.data);
-        })
-    }
     
     return( 
         <Tab panes={panes} />
