@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Search from '../components/searchbar';
 import Login from  '../components/login';
+import bg from '../components/imgs/back.png';
 export default function Model() {
     const [pred, setPred] = useState(null);
     const [ing, setIng] = useState ({
@@ -66,10 +67,9 @@ export default function Model() {
     }  
 
     return (
-        <div className='main'>
-            <Login />
+        <div className='main h-screen'>
             <Search />
-            <div className='content'>
+            <div className='bg-fixed h-screen'  style={{backgroundImage: `url(${bg})`, height: '100vh',   backgroundSize: 'cover'}}> 
             <form>
                 <div>{loading ? 'Loading...' : ''}</div>
                 <h2>Enter Ingredients for us to analyse</h2>

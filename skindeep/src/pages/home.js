@@ -3,31 +3,43 @@ import { Link } from 'react-router-dom';
 import Login from '../components/login';
 import Search from '../components/searchbar';
 import { Button } from 'semantic-ui-react';
-import headerbg from '../components/imgs/headerbg.png';
+import headerbg from '../components/imgs/header.png';
+import stars from '../components/imgs/stars.png';
+import bg from '../components/imgs/bgg.png';
+import glow from '../components/imgs/bubble.png';
 
 function Home() {
 
     return (
-        <div className='main'>
+        <div className='bg-cover' >
             
-        
-            <div className="flex flex-col" /*style={{backgroundImage: `url(${headerbg})`, height: '100vh', width: '100%'}}*/>
+            <div className="flex flex-col justify-center" >
                 <Search />
-                <div className='flex flex-row justify-center'>
-                    <img src={headerbg} alt="background" className="w-1/3 h-full" />
-                </div>
             
-                <div className="bg-blue-100" style={{ height: '20vh', width: '100%'}}> 
-                <Button><Link to="/model">Check a product</Link></Button>
-                <Button><Link to="/quiz">Find my skin type</Link></Button>
-                <Button>Search by Ingredient</Button>
+                <div className="flex flex-row xs:flex-wrap bg-sky sm:flex-nowrap h-screen p-10 w-full justify-center items-center items-center px-40 lg:mt-auto bg-cover bg-no-repeat"  style={{backgroundImage: `url(${bg})`, height: '100vh',   backgroundSize: '100%'}}> 
+
+                    <Link to="/model" className=''>
+                        <div className='flex sm:h-80 sm:w-80 xs:h-50 xs:w-50 text-center items-center rounded-xl hover:animate-bounce lg:m-10 lg:mt-40' style={{backgroundImage: `url(${glow})`, backgroundSize: '100%'}}>
+                            <h3 className='font-light font-Archivo p-20 text-slate-700 xs:text-sm md:text-2xl '>
+                                Analyse a product's ingredients (with AI)
+                            </h3>
+                        </div>
+                    </Link>
+                    
+                    <Link to="/quiz">
+                        <div className='flex sm:h-80 sm:w-80 xs:h-50 xs:w-50 text-center items-center  hover:animate-bounce lg:m-10 lg:mt-40' style={{backgroundImage: `url(${glow})`, backgroundSize: '100%'}}>
+                            <h3 className='font-light font-Archivo p-20 text-pretty text-slate-700 xs:text-xs md:text-2xl '>Get personalised product recommendations</h3>
+                        </div>
+                    </Link>
+                    
+                    {/*<Link to="/number3">
+                        <div className='flex bg-pink-100 justify-center items-center rounded-lg hover:animate-bounce shadow-black shadow-lg my-5 sm:m-10' style={{backgroundImage: `url(${stars})`, backgroundSize: '80%'}}>
+                            <h3 className='font-light p-5 mx-5 xs:text-xs sm:text-s md:p-15 md:text-base lg:p-20'>Search Ingredients</h3>
+                        </div>
+    </Link          >*/}
+                </div>
              </div>
             </div>
-           
-            
-            
-            
-        </div>
         
     );
 };
