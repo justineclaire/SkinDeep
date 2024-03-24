@@ -38,19 +38,20 @@ function Login() {
 
   const register = async () => {
     try {
-      const user = createUserWithEmailAndPassword(
+      const userCredential = await createUserWithEmailAndPassword(
         auth,
         registerEmail,
         registerPassword
-      ).then((UserCredentialImpl) => {
-      if (UserCredentialImpl.user) {
-        updateProfile(UserCredentialImpl.user, {
+      );
+  
+      if (userCredential.user) {
+        await updateProfile(userCredential.user, {
           displayName: registerUsername
         });
-
-        console.log(UserCredentialImpl.user);
-      }});
-      console.log(user);
+  
+        console.log(userCredential.user);
+      }
+  
       setErrorMessage('');
     } catch (error) {
       console.log(error.message);
@@ -79,8 +80,8 @@ function Login() {
       console.log(error.message);
       if (error.code === "auth/user-not-found") {
         setErrorMessage("This email does not have an account, please sign up");
-      } else if (error.code === "auth/invalid-email") {
-        setErrorMessage("The email address is not valid.");
+      } else if (error.code === "auth/invalid-credential") {
+        setErrorMessage("Error logging in. Please try again. Ensure you have the correct email and password");
       } else if (error.code === "auth/operation-not-allowed") {
         setErrorMessage("Operation not allowed.");
       } else if (error.code === "auth/wrong-password") {
@@ -97,6 +98,10 @@ function Login() {
     
     const changeAuthMode = () => {
         setAuthMode(authMode === "signin" ? "signup" : "signin")
+        setLoginEmail("");
+        setLoginPassword("");
+        setRegisterEmail("");
+        setRegisterPassword("");
     }
   const [showModal, setShowModal] = React.useState(false);
 
