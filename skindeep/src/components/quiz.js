@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import questions from './questions.js';
-import { ButtonGroup, Button, Message, Input  } from 'semantic-ui-react'
+import { Message, Input  } from 'semantic-ui-react'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import Login from '../components/login';
+import webpage from '../components/imgs/webpage.png';
 import Nav from '../components/navbar.js'
 import {
     onAuthStateChanged,
   } from "firebase/auth";
 import { auth } from "../firebase";
+import bg from '../components/imgs/back.png';
 
 function Quiz() {
 
@@ -87,58 +88,67 @@ function Quiz() {
 
     
 return (
-    <div className='main'>
+    <div className='' >
         <Nav />
-        <div className='content'>
+        <div className='content font-Archivo text-center sm:text-xl xs:text-lg bg-sky bg-cover flex justify-center items-center' style={{backgroundImage: `url(${bg})`, height: '100vh',   backgroundSize: 'cover'}} >
         { !user ? (
-            <div>please login first</div>
+            <div className='quiz bg-pink-100 rounded-xl w-2/3 h-2/3'>
+                    <div className=''>please login first</div>
+            </div>
         ) : ( 
-            <div className='quiz'>
+            
+            <div className='flex flex-col md:w-11/12 sm:w-full mb-auto xs:pt-10 sm:mt-2 sm:bg-center sm:bg-contain bg-no-repeat justify-center items-center rounded-xl bg-none-xs'
+                style={{backgroundImage: `url(${webpage})`}}>
+
+                <div className='flex flex-col justify-between items-center sm:p-40 xs:p-8 w-2/3 h-1/5'>
                     <span>Question {current +1} / {questions.length}</span>
-                    <div className='questions'>
+
+                    <div className='text-slate-600 text-wrap fond-boldest sm:text-xl xs:text-lg'>
                         {questions[current].question}
                     </div>
                     <div className='answers'>
-                    <ButtonGroup vertical>
-                    {
-                        questions[current].options.length > 0 ? (
-                            questions[current].options.map((option) => (
-                            <Button
-                                className='ansbtn'
-                                id={selected === option ? "selected" : "unselected"}
-                                key={option}
-                                onClick={() => chosenAnswer(option)}
-                                value={option}
-                            >
-                                {option}
-                            </Button>
-                            ))
-                        ) : (
-                            null
-                        )
-                    }
-                    </ButtonGroup>
+                    <div className='flex flex-col justify-between items-center'>
+                        { 
+                            questions[current].options.length > 0 ? (
+                                questions[current].options.map((option) => (
+                                <button  
+                                    className={`bg-sky rounded-xl my-1 w-64 h-12 ${selected === option ? "selected" : "unselected"}`}
+                                    key={option}
+                                    onClick={() => chosenAnswer(option)}
+                                    value={option}
+                                >
+                                    {option}
+                                </button  >
+                                ))
+                            ) : (
+                                null
+                            )
+                        }
+                    </div>
                        {current < questions.length - 1 ? (
-                        <div>
+                        <div className='flex justify-center items-center'>
                         
-                          <Button
+                          <button 
+                            className='w-64 h-12 bg-webpink'
                             onClick={() => {handleNext()}}
                           >
-                            Next
-                          </Button>
+                            Next ➡️
+                          </button >
                        {errorMessage.length > 0 && <Message color='red'>{errorMessage}</Message>}
                       </div>
                       ) : (
-                            <Button
-                            type='submit'
-                            onClick={(e) => submit(e)}
+                            <button 
+                                className='rounded-xl w-64 h-12 bg-webpink'
+                                type='submit'
+                                onClick={(e) => submit(e)}
                             >
                             Submit 
-                            </Button>
+                            </button >
                        )}
                     
                     </div>
                 </div>
+            </div>
         )}
             
         </div>

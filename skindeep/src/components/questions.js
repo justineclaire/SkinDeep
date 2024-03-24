@@ -15,7 +15,7 @@ const questions = [
     },
     {
         question: "Do you suffer from acne?",
-        options: ["Yes - it's bad", "Sometimes - but it isn't my main concern", "No not really"],
+        options: ["Yes - it's bad", "No not really"],
         key: 'acne'
     },
     {
@@ -52,7 +52,7 @@ const questions = [
         key: 'barrier'
     },
     {
-        question: "Is hyperpigmentation a concern for you? Hyperpigmentation is a harmless skin condition which is characterised by patches of skin appearing much darker than a person's overall skin tone",
+        question: "Is hyperpigmentation a concern for you?",
         options: ["Yes", "No not really"],
         key: 'hyper'
     }

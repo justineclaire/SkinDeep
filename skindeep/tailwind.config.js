@@ -15,6 +15,7 @@ module.exports = {
       },
       colors: {
         "sky": '#CAE9F9',
+        "webpink": '#ffc3c3'
       },
     },
     fontFamily: {

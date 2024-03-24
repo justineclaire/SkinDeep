@@ -67,9 +67,9 @@ export default function Model() {
     }  
 
     return (
-        <div className='main h-screen'>
+        <div className='bg-fixed bg-sky h-screen'  style={{backgroundImage: `url(${bg})`, height: '100vh',   backgroundSize: 'cover'}}>
             <Nav />
-            <div className='bg-fixed h-screen'  style={{backgroundImage: `url(${bg})`, height: '100vh',   backgroundSize: 'cover'}}> 
+            <div className='bg-fixed h-screen'> 
             <form>
                 <div>{loading ? 'Loading...' : ''}</div>
                 <h2>Enter Ingredients for us to analyse</h2>

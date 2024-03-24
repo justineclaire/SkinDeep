@@ -5,9 +5,19 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&display=swap');
 
-@import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap')
+@import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
 
 
+.selected {
+  background-color: #06334d;
+  color:white;
+}
+
+@media (max-width: 640px) {
+  .bg-none-xs {
+    background-image: none !important;
+  }
+}
 
 /*.main {
   width: 100%;
