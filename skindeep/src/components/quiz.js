@@ -4,7 +4,7 @@ import { ButtonGroup, Button, Message, Input  } from 'semantic-ui-react'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Login from '../components/login';
-import Search from '../components/searchbar.js'
+import Nav from '../components/navbar.js'
 import {
     onAuthStateChanged,
   } from "firebase/auth";
@@ -88,8 +88,7 @@ function Quiz() {
     
 return (
     <div className='main'>
-        <Search />
-        <Login />
+        <Nav />
         <div className='content'>
         { !user ? (
             <div>please login first</div>

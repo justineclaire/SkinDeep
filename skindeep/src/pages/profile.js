@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import Login from '../components/login';
-import Search from '../components/searchbar';
+import Nav from '../components/navbar';
 import Products from '../components/products';
 import {
     onAuthStateChanged,
@@ -77,8 +76,7 @@ function Profile() {
         
     return (
         <div className='main'>
-            <Search />
-            <Login />
+            <Nav />
             <div className='content'>
             <div>
                 

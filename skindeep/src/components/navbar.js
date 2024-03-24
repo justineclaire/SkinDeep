@@ -2,10 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import "../App.css";
 import { Button, Icon } from 'semantic-ui-react'
-import Login from '../components/login';
+import Login from './login';
 import logo from '../components/imgs/header2.png';
 
-function Search() {
+function Nav() {
     return (
         <nav class="bg-gradient-to-l from-white to-pink-300 w-full">
         <div id="search" className="flex flex-wrap items-center sm:justify-between xs:justify-center mx-auto p-4">
@@ -19,4 +19,4 @@ function Search() {
 
 };
 
-export default Search;
+export default Nav;

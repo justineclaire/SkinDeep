@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Login from '../components/login';
-import Search from '../components/searchbar';
+import Search from '../components/navbar';
 import { Button } from 'semantic-ui-react';
 import headerbg from '../components/imgs/header.png';
 import stars from '../components/imgs/stars.png';
@@ -16,19 +16,20 @@ function Home() {
             <div className="flex flex-col justify-center" >
                 <Search />
             
-                <div className="flex flex-row xs:flex-wrap bg-sky sm:flex-nowrap h-screen p-10 w-full justify-center items-center items-center px-40 lg:mt-auto bg-cover bg-no-repeat"  style={{backgroundImage: `url(${bg})`, height: '100vh',   backgroundSize: '100%'}}> 
+                <div className="flex flex-row xs:flex-wrap bg-sky sm:flex-nowrap h-screen p-10 w-full justify-center items-center md:px-40 lg:mt-auto bg-cover bg-no-repeat"  style={{backgroundImage: `url(${bg})`, height: '100vh',   backgroundSize: '100%'}}> 
 
+                    
                     <Link to="/model" className=''>
-                        <div className='flex sm:h-80 sm:w-80 xs:h-50 xs:w-50 text-center items-center rounded-xl hover:animate-bounce lg:m-10 lg:mt-40' style={{backgroundImage: `url(${glow})`, backgroundSize: '100%'}}>
-                            <h3 className='font-light font-Archivo p-20 text-slate-700 xs:text-sm md:text-2xl '>
-                                Analyse a product's ingredients (with AI)
+                        <div className='flex sm:h-80 sm:w-80 xs:h-40 xs:w-40 text-center items-center justify-center hover:animate-bounce lg:m-10 lg:mt-40' style={{backgroundImage: `url(${glow})`, backgroundSize: '100%'}}>
+                            <h3 className='font-light font-Valera p-20 text-pretty text-slate-700 xs:text-sm sm:text-3xl '>
+                                Analyse ingredients (with AI)
                             </h3>
                         </div>
                     </Link>
                     
                     <Link to="/quiz">
-                        <div className='flex sm:h-80 sm:w-80 xs:h-50 xs:w-50 text-center items-center  hover:animate-bounce lg:m-10 lg:mt-40' style={{backgroundImage: `url(${glow})`, backgroundSize: '100%'}}>
-                            <h3 className='font-light font-Archivo p-20 text-pretty text-slate-700 xs:text-xs md:text-2xl '>Get personalised product recommendations</h3>
+                        <div className='flex sm:h-80 sm:w-80 xs:h-40 xs:w-40 text-center items-center justify-center hover:animate-bounce lg:m-10 lg:mt-40' style={{backgroundImage: `url(${glow})`, backgroundSize: '100%'}}>
+                            <h3 className='font-light font-Valera p-20 text-pretty text-slate-700 xs:text-sm sm:text-3xl'>Product recommendations</h3>
                         </div>
                     </Link>
                     

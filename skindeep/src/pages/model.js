@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import Search from '../components/searchbar';
+import Nav from '../components/navbar';
 import Login from  '../components/login';
 import bg from '../components/imgs/back.png';
 export default function Model() {
@@ -68,7 +68,7 @@ export default function Model() {
 
     return (
         <div className='main h-screen'>
-            <Search />
+            <Nav />
             <div className='bg-fixed h-screen'  style={{backgroundImage: `url(${bg})`, height: '100vh',   backgroundSize: 'cover'}}> 
             <form>
                 <div>{loading ? 'Loading...' : ''}</div>

@@ -19,6 +19,7 @@ module.exports = {
     },
     fontFamily: {
       'Archivo': ['Archivo', 'sans-serif'],
+      'Valera': ['Valera Round', 'sans-serif'],
       sanss: ['Graphik', 'sans-serif'],
       body: [
         "Inter",
