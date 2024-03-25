@@ -105,7 +105,16 @@ app.post("/predict", (req, res) => {
     
 });
 
+function ingsdb_create() {
+    const q = "CREATE TABLE `ingredients` (id INT AUTO_INCREMENT, name VARCHAR(255), infoPRIMARY KEY (id))";
+    db.query(q, (err, data)=>{
+        if(err) return console.log(err);
+        return console.log(data);
+    });
+}
+
 app.listen(8800, () => {
     console.log("Backend server is running!")
     //getimgs();
+    //ingsdb_create();
 })

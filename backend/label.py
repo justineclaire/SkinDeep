@@ -3,25 +3,23 @@ import pandas as pd
 ''' Label cosmetics.csv with label encoded tags based on ingredients'''
 data = pd.read_csv("cosmetics_mod.csv")
 
+acneIng = ["witch", "amoxicillin", "azelaic", "niacinamide", "vitc", "tartaric", "apple cider vinegar", "benzoyl peroxide", "cumin", "bentonite", "citric", "lactic", "malic", "retinol", "retinal", "retinyl", "salicylic", "hydrogen peroxide", "hemp", "cortisone", "honey", "kaolin", "magnesium", "mandelic", "zinc", "honey", "lactococcus", "centella asia", "succinic", "tretinoin", "turmeric", "damascena", "vitamin a"]
+wrinklesIng = ["tocopherol", "vitamin a", "caffeine", "arbutin", "bakuchiol", "ferulic", "vitc", "argireline", "glycolic", "citric", "lactic", "malic", "cumin", "caviar", "sodium hyaluronate", "retinol", "retinal", "retinyl", "peptide", "ceramide", "sphingosine", "hyaluronic", "glycerin", "mandelic", "squalane", "squalene", "matrixy", "centella asiatica", "sodium hyaluronate", "soy", "rosehip", "turmeric", "seaweed", "rubus"]
+brightIng = ["amla", "arbutin", "azelaic", "ferulic", "vitc", "citric", "lactic", "malic", "cumin", "peptide", "q10", "grapeseedoil","grape", "vitis vinifera", "hydroquinone", "kojic", "licorice", "turmeric", "tranexamic acid"]
+bhIng = ["witch", "azelaic", "tartaric", "cumin", "salicylic","sulfur", "glycolic", "citric", "lactic", "tretinoin", "damascena"]
+hyperIng = ["azelaic", "niacinamide", "apple cider vinegar", "grapeseedoil","vitis vinifera", "hydroquinone", "kojic", "propolis", "phytic", "aloe","glutathione", "tranexamic acid", "mandelic"]
+redIng = ["aloe", "apricot kernel", "amino", "avocado", "almond", "argan", "niacinamide", "camellia", "resveratrol", "azulene", "borage", "cannabidiol", "q10", "glycerin", "grapeseedoil", "vitis vinifera", "cortisone", "honey", "marshmallow", "zinc", "centella asiatica", "snail mucin", "soy", "camellia oleifera", "cucumber", "watermelon", "beeswax"]
+texIng = ["vitamin a", "allantoin", "aluminum dihydroxy allantoinate", "bakuchiol", "glycolic", "citric", "lactic", "malic", "retinol", "retinal", "retinyl", "salicylic", "lime pearl"]
+acneAvoid = ["apricot kernel", "avocado", "olive", "oxybenzone", "alcohol denat", "vite", "eucalyptus","petroleum jelly", "dimethicone", "mineral", "paraffinum liquidum", "petrolatum", "cyclopentasiloxane", "cetyl acetate", "lauric", "linseed", "cocoa", "algae", "zinc oxide"]
+barrier = ["lactobacillus", "apricot kernel", "avocado", "capric triglyceride", "astaxanthin", "resveratrol", "azulene", "beta-glucan", "ceramide", "sphingosine", "hyaluronic", "glycerin", "honey", "isododecane","lactococcus", "matrixy", "centella asiatica", "snail mucin", "soy", "rosehip", "oat", "panthenol", "pantothenic", "ethyl linoleate", "chia", "stearic", "marula", "cucumber", "barley", "hordeum vulgare", "sesame"]
+dryAvoid = ["witch","alcohol denat", "alpha-hydroxy acid", "apple cider vinegar", "acetic", "bentonite", "salicylic", "eucalyptus", "hemp", "kaolin", "damascena", "cyclopentasiloxane"]
+sensIng = ["aloe", "glycerin", "ceramide", "capric triglyceride", "ceramide", "glycerin", "greentea", "oatmeal"]
+sensAvoid = ["lactic", "glycolic", "alcohol", "ethanol", "parfum", "fragrance" "benzoyl peroxide", "citric", "salicylic", "retinol", "sulfate", "sulphate"]
+normAvoid = ["methylparaben", "propylparaben", "butylparaben", "thylparaben", "paraffinum liquidum", "petrolatum", "mineral oil", "formaldehyde", "chromotropic", "methenamine"]
+combiIng = ["superoxidedis", "hyaluronic", "lactic", "peptide", "squalane", "glycolic", "ceramide", "panthenol", "niacinamide", "jojoba", "ceramide", "glycerin", "centella asia"]
 
 
 def label():
-
-  acneIng = ["witch", "amoxicillin", "azelaic", "niacinamide", "vitc" "tartaric", "apple cider vinegar", "benzoyl peroxide", "cumin", "bentonite", "citric", "lactic", "malic", "retinol", "retinal", "retinyl", "salicylic", "hydrogen peroxide", "hemp", "cortisone", "honey", "kaolin", "magnesium", "mandelic", "zinc", "honey", "lactococcus", "centella asia", "succinic", "tretinoin", "turmeric", "damascena", "vitamin a"]
-  wrinklesIng = ["tocopherol", "vitamin a", "caffeine", "arbutin", "bakuchiol", "ferulic", "vitc", "argireline", "glycolic", "citric", "lactic", "malic", "cumin", "caviar", "sodium hyaluronate", "retinol", "retinal", "retinyl", "peptide", "ceramide", "sphingosine", "hyaluronic", "glycerin", "mandelic", "squalane", "squalene", "matrixy", "centella asiatica", "sodium hyaluronate", "soy", "rosehip", "turmeric", "seaweed", "rubus"]
-  brightIng = ["amla", "arbutin", "azelaic", "ferulic", "vitc", "citric", "lactic", "malic", "cumin", "peptide", "q10", "grapeseedoil","grape", "vitis vinifera", "hydroquinone", "kojic", "licorice", "turmeric", "tranexamic acid"]
-  bhIng = ["witch", "azelaic", "tartaric", "cumin", "salicylic","sulfur", "glycolic", "citric", "lactic", "tretinoin", "damascena"]
-  hyperIng = ["azelaic", "niacinamide", "apple cider vinegar", "grapeseedoil","vitis vinifera", "hydroquinone", "kojic", "propolis", "phytic", "aloe","glutathione", "tranexamic acid", "mandelic"]
-  redIng = ["aloe", "apricot kernel", "amino", "avocado", "almond", "argan", "niacinamide", "camellia", "resveratrol", "azulene", "borage", "cannabidiol", "q10", "glycerin", "grapeseedoil", "vitis vinifera", "cortisone", "honey", "marshmallow", "zinc", "centella asiatica", "snail mucin", "soy", "camellia oleifera", "cucumber", "watermelon", "beeswax"]
-  texIng = ["vitamin a", "allantoin", "aluminum dihydroxy allantoinate", "bakuchiol", "glycolic", "citric", "lactic", "malic", "retinol", "retinal", "retinyl", "salicylic", "lime pearl"]
-  acneAvoid = ["apricot kernel", "avocado", "olive", "oxybenzone", "alcohol denat", "vite", "eucalyptus","petroleum jelly", "dimethicone", "mineral", "paraffinum liquidum", "petrolatum", "cyclopentasiloxane", "cetyl acetate", "lauric", "linseed", "cocoa", "algae", "zinc oxide"]
-  barrier = ["lactobacillus", "apricot kernel", "avocado", "capric triglyceride", "astaxanthin", "resveratrol", "azulene", "beta-glucan", "ceramide", "sphingosine", "hyaluronic", "glycerin", "honey", "isododecane","lactococcus", "matrixy", "centella asiatica", "snail mucin", "soy", "rosehip", "oat", "panthenol", "pantothenic", "ethyl linoleate", "chia", "stearic", "marula", "cucumber", "barley", "hordeum vulgare", "sesame"]
-  dryAvoid = ["witch","alcohol denat", "alpha-hydroxy acid", "apple cider vinegar", "acetic", "bentonite", "salicylic", "eucalyptus", "hemp", "kaolin", "damascena", "cyclopentasiloxane"]
-  sensIng = ["aloe", "glycerin", "ceramide", "capric triglyceride", "ceramide", "glycerin", "greentea", "oatmeal"]
-  sensAvoid = ["lactic", "glycolic", "alcohol", "ethanol", "parfum", "fragrance" "benzoyl peroxide", "citric", "salicylic", "retinol", "sulfate", "sulphate"]
-  normAvoid = ["methylparaben", "propylparaben", "butylparaben", "thylparaben", "paraffinum liquidum", "petrolatum", "mineral oil", "formaldehyde", "chromotropic", "methenamine"]
-  combiIng = ["superoxidedis", "hyaluronic" "lactic", "peptide", "squalane", "glycolic", "ceramide", "panthenol", "niacinamide", "jojoba", "ceramide", "glycerin", "centella asia"]
-
 
   data["acne"] = 1 # pimples
   data["age"] = 1 # ageing
