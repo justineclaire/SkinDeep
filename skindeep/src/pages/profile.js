@@ -94,7 +94,7 @@ function Profile() {
                                 <div>
                                     <h2 className='text-lg'>Here are some product recommendations for you based on your quiz results:</h2>
                                   
-                                        <div className='md:w-[900px] xs:w-5/6 bg-webpink p-4 rounded-xl' >
+                                        <div className='md:w-[760px] xs:w-[300px] lg:w-[900px] bg-webpink p-4 rounded-xl' >
                                         <Products />
                                         </div>
                                     

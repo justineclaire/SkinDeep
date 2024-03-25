@@ -46,10 +46,11 @@ function Products() {
                     <div className='flex flex-col w-3/4 xs:text-center sm:text-left mx-5 p-5'>
                         <h3 className=" xs:text-lg sm:text-xl font-semibold ">{cream.Name}</h3>
                         <p className ="text-gray-800 ">{cream.Brand}</p>  
+                        <button onClick={() => openModal(cream)} className='bg-pink-700 w-1/2 text-white rounded-lg p-2'>More Info</button>  
                     </div>
                 </div>
             ))}
-        </ul>
+        </ul>{modalOpen && <Analysis cream={selectedCream}  openModal={openModal} />}
             </TabPane> },
         { menuItem: 'Cleansers', render: () => <TabPane>
             <ul className='overflow-auto h-max w-full bg-sky rounded-xl'>
@@ -59,10 +60,11 @@ function Products() {
                     <div className='flex flex-col w-3/4 xs:text-center sm:text-left mx-5 p-5'>
                         <h3 className=" xs:text-lg sm:text-xl font-semibold ">{cleanser.Name}</h3>
                         <p className ="text-gray-800 ">{cleanser.Brand}</p>  
+                        <button onClick={() => openModal(cleanser)} className='bg-pink-700 w-1/2 text-white rounded-lg p-2'>More Info</button>  
                     </div>
                 </div>
             ))}
-        </ul>
+        </ul>{modalOpen && <Analysis cream={selectedCream}  openModal={openModal} />}
             </TabPane> },
         { menuItem: 'Sunscreen', render: () => <TabPane>
                 <ul className='overflow-auto h-max w-full bg-sky rounded-xl'>
@@ -71,12 +73,13 @@ function Products() {
                             <img className=" border-2 h-24 w-24 border-gray-300 rounded-xl bg-white" src={sunscreen.img} alt="product" />
                             <div className='flex flex-col w-3/4 xs:text-center sm:text-left mx-5 p-5'>
                                 <h3 className=" xs:text-lg sm:text-xl font-semibold ">{sunscreen.Name}</h3>
-                                <p className ="text-gray-800 ">{sunscreen.Brand}</p>  
+                                <p className ="text-gray-800 ">{sunscreen.Brand}</p> 
+                                <button onClick={() => openModal(sunscreen)} className='bg-pink-700 w-1/2 text-white rounded-lg p-2'>More Info</button>   
                             </div>
                         </div>
                     ))}
                 </ul>
-                
+                {modalOpen && <Analysis cream={selectedCream}  openModal={openModal} />}
             
         </TabPane> },
         { menuItem: 'Eyecream', render: () => <TabPane>
@@ -87,10 +90,11 @@ function Products() {
                     <div className='flex flex-col w-3/4 xs:text-center sm:text-left mx-5 p-5'>
                         <h3 className=" xs:text-lg sm:text-xl font-semibold ">{cream.Name}</h3>
                         <p className ="text-gray-800 ">{cream.Brand}</p>  
+                        <button onClick={() => openModal(cream)} className='bg-pink-700 w-1/2 text-white rounded-lg p-2'>More Info</button>  
                     </div>
                 </div>
             ))}
-        </ul>
+        </ul>{modalOpen && <Analysis cream={selectedCream}  openModal={openModal} />}
         </TabPane>},
       ]
 
