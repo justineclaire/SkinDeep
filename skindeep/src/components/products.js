@@ -5,8 +5,17 @@ import {
   } from "firebase/auth";
 import { auth } from "../firebase";  
 import axios from 'axios';
+import Analysis from './analysis';
 
 function Products() {
+
+    const [modalOpen, setModalOpen] = useState(false);
+    const [selectedCream, setSelectedCream] = useState(null);
+
+    const openModal = (cream) => {
+        setSelectedCream(cream);
+        setModalOpen(!modalOpen);
+    };
 
 
     const panes = [
@@ -20,11 +29,13 @@ function Products() {
                     <img className=" border-2 h-24 w-24 border-gray-300 rounded-xl bg-white" src={cream.img} alt="product" />
                     <div className='flex flex-col w-3/4 xs:text-center sm:text-left mx-5 p-5'>
                         <h3 className=" xs:text-lg sm:text-xl font-semibold ">{cream.Name}</h3>
-                        <p className ="text-gray-800 ">{cream.Brand}</p>  
+                        <p className ="text-gray-800 ">{cream.Brand}</p>
+                        <button onClick={() => openModal(cream)} className='bg-pink-700 w-1/2 text-white rounded-lg p-2'>More Info</button>  
                     </div>
                 </div>
-            ))}
-        </ul>)}
+            ))
+            }
+        </ul>)}{modalOpen && <Analysis cream={selectedCream}  openModal={openModal} />}
     </TabPane>) },
 
         { menuItem: 'Toners', render: () => <TabPane>

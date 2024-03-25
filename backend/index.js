@@ -111,6 +111,7 @@ app.post("/predict", (req, res) => {
 app.post("/search", (req, res) => {
     const q = "SELECT * FROM `ingredients` I WHERE SOUNDEX(I.name) = SOUNDEX(?) OR I.name LIKE ?";
     const search = req.body.search;
+    console.log(search);
     const searchLike = "%" + search + "%";
     const onlyLettersPattern = /^[A-Za-z]+$/;
     
@@ -118,18 +119,20 @@ app.post("/search", (req, res) => {
     if(!search.match(onlyLettersPattern)){
       return res.status(400).json({ err: "No special characters and no numbers, please!"})
     }
+    
 
     db.query(q, [search, searchLike], (err, data)=>{
         if(err) console.log(err);
+        //console.log(data);
         return res.json(data);
     });
 });
 
 //product info
-app.get("/ings/:pname", (req, res) => {
-    const q = "SELECT `name`, `info` FROM `ingredients` I JOIN `prod_ing` X ON X.ingid = I.id WHERE X.productid = (SELECT `id` FROM `products`p WHERE p.Name LIKE '?')";
-    const pid = req.params.pname;
-    console.log(pid);
+app.post("/ings", (req, res) => {
+    const q = "SELECT `name`, `info` FROM `ingredients` I JOIN `prod_ing` X ON X.ingid = I.id WHERE X.productid = ?";
+    const pid = req.body.id;
+   
     db.query(q, pid, (err, data)=>{
         if(err) return res.json(err);
         return res.json(data);
