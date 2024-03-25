@@ -3,6 +3,7 @@ import mysql from "mysql"
 import { spawn } from 'child_process';
 import cors from "cors"
 import recs from "./recs.js";
+import {metaphone} from 'metaphone'
 import showimg from "./prodimgs.js";
 import fs from "fs";
 import getimgs from "./webscrapeimgs.js";
@@ -105,16 +106,38 @@ app.post("/predict", (req, res) => {
     
 });
 
-function ingsdb_create() {
-    const q = "CREATE TABLE `ingredients` (id INT AUTO_INCREMENT, name VARCHAR(255), infoPRIMARY KEY (id))";
-    db.query(q, (err, data)=>{
-        if(err) return console.log(err);
-        return console.log(data);
+
+//search ingredients
+app.post("/search", (req, res) => {
+    const q = "SELECT * FROM `ingredients` I WHERE SOUNDEX(I.name) = SOUNDEX('?')";
+    const search = req.body.search;
+    
+    const onlyLettersPattern = /^[A-Za-z]+$/;
+
+
+    if(!search.match(onlyLettersPattern)){
+      return res.status(400).json({ err: "No special characters and no numbers, please!"})
+    }
+
+    db.query(q, search, (err, data)=>{
+        if(err) return res.json(err);
+        return res.json(data);
     });
-}
+});
+
+//product info
+app.get("/prod/:pname", (req, res) => {
+    const q = "SELECT `name`, `info` FROM `ingredients` I JOIN `prod_ing` X ON X.ingid = I.id WHERE X.productid = (SELECT `id` FROM `products`p WHERE p.Name LIKE '?')";
+    const pid = req.params.pname;
+    console.log(pid);
+    db.query(q, pid, (err, data)=>{
+        if(err) return res.json(err);
+        return res.json(data);
+    });
+});
 
 app.listen(8800, () => {
     console.log("Backend server is running!")
     //getimgs();
-    //ingsdb_create();
+    
 })
