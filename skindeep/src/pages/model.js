@@ -43,11 +43,11 @@ export default function Model() {
        console.log(data);
        data = data.map((item) => {
               if (item === '0') {
-                return 'Not suitable';
+                return 'Not suitable ❌';
               } else if (item === '1') {
-                return 'Neutral';
+                return 'Neutral 🙂';
               } else if (item === '2') {
-                return 'Great!';
+                return 'Great! ✅';
               }
        });
        const result = {
@@ -113,21 +113,21 @@ export default function Model() {
     return (
         <div className='' >
             <Nav />
-            <div className='flex flex-col justify-center items-center font-Archivo text-center sm:text-xl xs:text-lg bg-sky bg-fixed h-screen p-5' style={{backgroundImage: `url(${bg})`, height: '100vh',   backgroundSize: 'cover'}} >
-                <div className='flex justify-center items-center md:w-2/3 md:h-2/3 mb-auto mt-xs:pt-10  bg-no-repeat bg-center bg-contain rounded-xl'
+            <div className='flex flex-col justify-center items-center font-Archivo text-center sm:text-xl xs:text-lg bg-sky bg-fixed h-screen p-5 overscroll-contain' style={{backgroundImage: `url(${bg})`, height: '100vh',   backgroundSize: 'cover'}} >
+                <div className='flex justify-center items-center sm:w-full sm:h-full xs:mt-64 md:mt-5 xs:pt-10 pb-3 bg-no-repeat bg-center bg-contain rounded-xl bg-none-xs'
                         style={{backgroundImage: `url(${webpage})`, marginTop: '5'}}>
-                    <form>
+                    <form className='p-10'>
                         <div>{loading ? 'Loading...' : ''}</div>
-                        <h2>Enter Ingredients for us to analyse</h2>
-                        <p>please separate them by commas</p>
+                        <h2 className='sm:text-base md:text-xl'>Enter Ingredients for us to analyse</h2>
+                        <p className='xs:text-xs sm:text-sm md:text-md lg:text-lg'>please separate them by commas</p>
                         <input type='text'  
-                                className='rounded-lg p-2'
+                                className='rounded-lg xs:p-1 sm:p-2 xs:w-1/2 sm:w-1/3  xs:text-xs sm:text-sm md:text-md lg:text-lg '
                                 placeholder='Ingredients' 
                                 name='ingredients' 
                                 value={ing.ingredients} 
                                 onChange={handleChange} />
                         <button 
-                            className='rounded-lg bg-sky p-2 m-2'
+                            className='rounded-lg bg-sky xs:p-1 sm:p-2 sm:m-2 xs:text-xs sm:text-sm md:text-md lg:text-lg'
                             onClick={handleClick}>
                             Submit
                         </button>
@@ -135,40 +135,32 @@ export default function Model() {
 
                     </form>
                 </div>
-                <div>
-                <div className='bg-bgpink rounded-lg flex flex-wrap flex-col justify-center items-center'>
-                    {pred ? 
-                        <>
-                            <h2>Analysis:</h2>
-                            <p>Based on the ingredients you entered:</p>
-                            <table className='w-2/3 mb-5 rounded-lg'>
-                                <tr className='w-80 rounded-lg' >
-                                    {Object.keys(pred).slice(0, 7).map(key => (
-                                        <th className='border-2 border-slate-700' key={key}>{rename(key)}</th>
-                                    ))}
-                                </tr>
-                                <tr className='w-80 rounded-lg'>
-                                    {Object.keys(pred).slice(0, 7).map(key => (
-                                        <td className='border-2 border-slate-700' key={key}>{pred[key]}</td>
-                                    ))}
-                                </tr>
-                                <tr className='w-80 rounded-lg'>
-                                    {Object.keys(pred).slice(7).map(key => (
-                                        <th className='border-2 border-slate-700' key={key}>{rename(key)}</th>
-                                    ))}
-                                </tr>
-                                <tr className='w-80 rounded-lg'>
-                                    {Object.keys(pred).slice(7).map(key => (
-                                        <td className='border-2 border-slate-700' key={key}>{pred[key]}</td>
-                                    ))}
-                                </tr>
-                            </table>
-                        </>
-                    : ''}
+                <div className='flex flex-row flex-wrap justify-center items-center mt-5'>
+                    <div className='bg-bgpink rounded-xl flex flex-wrap flex-col justify-center items-center sm::w-1/3 xs:w-full'>
+                        <h2 className='sm:text-base md:text-xl'>Analysis:</h2>
+                    </div>
+                    <div className='bg-bgpink rounded-xl flex flex-wrap flex-col justify-center items-center sm::w-1/3 xs:w-full'>
+                        {pred ? 
+                            <>
+                                <h2 className='sm:text-base md:text-xl'>Prediction Results:</h2>
+                                    <p className='xs:text-xs sm:text-sm md:text-md lg:text-lg'>Based on the ingredients you entered, our machine thinks:</p>
+                                    <div className='flex flex-wrap w-full justify-center items-center sm:px-5 pb-2 sm:mt-2'>
+                                        {Object.keys(pred).map(key => (
+                                            <div className='flex w-full xs:w-1/2 sm:w-1/4 lg:w-1/6 xl:w-1/5 2xl:w-1/6 justify-center items-center'>
+                                                <div className='border-2 border-slate-700 p-2 rounded-lg divide-slate-700 divide-y xs:w-full sm:w-40 h-35'>
+                                                    <h3 className='text-center xs:text-sm sm:text-md '>{rename(key)}</h3>
+                                                    <p className='text-center xs:text-sm sm:text-md pt-2'>{pred[key]}</p>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                            </>
+                        : ''}
+                    </div>
                 </div>
                   
                 </div>
-            </div>
+           
         </div>
     );
 };

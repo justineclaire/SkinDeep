@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Login from '../components/login';
-import Search from '../components/navbar';
+import Nav from '../components/navbar.js';
 import { Button } from 'semantic-ui-react';
 import headerbg from '../components/imgs/header.png';
 import stars from '../components/imgs/stars.png';
@@ -14,7 +14,7 @@ function Home() {
         <div className='bg-cover' >
             
             <div className="flex flex-col justify-center" >
-                <Search />
+                <Nav />
             
                 <div className="flex flex-row xs:flex-wrap bg-sky sm:flex-nowrap h-screen p-10 w-full justify-center items-center md:px-40 lg:mt-auto bg-cover bg-no-repeat"  style={{backgroundImage: `url(${bg})`, height: '100vh',   backgroundSize: '100%'}}> 
 

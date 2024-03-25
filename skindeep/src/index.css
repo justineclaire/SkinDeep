@@ -17,6 +17,10 @@
   .bg-none-xs {
     background-image: none !important;
   }
+
+  menuItem {
+    display: none;
+  }
 }
 
 /*.main {

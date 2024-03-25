@@ -7,7 +7,9 @@ import {
   } from "firebase/auth";
 import { auth } from "../firebase";  
 import axios from 'axios';
-import { Button } from 'semantic-ui-react';
+import { button } from 'semantic-ui-react';
+import bg from '../components/imgs/back.png';
+import webpage from '../components/imgs/webpage.png';
 
 function Profile() {
 
@@ -20,12 +22,16 @@ function Profile() {
 
         useEffect(() => {
             const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-                setUid(currentUser.uid);
-                setUsername(currentUser.displayName);
-                setUser(currentUser);
-                
+                if (currentUser) {
+                    setUid(currentUser.uid);
+                    setUsername(currentUser.displayName);
+                    setUser(currentUser);
+                } else {
+                    setUser(null);
+                }
                 if(currentUser === null) {
                     setUser(null);
+
                 }
             });
 
@@ -75,36 +81,42 @@ function Profile() {
         }, [user, quiztaken]); 
         
     return (
-        <div className='main'>
+        
+        <div className='' >
             <Nav />
-            <div className='content'>
-            <div>
-                
+        <div className=' text-slate-700 flex flex-col justify-start items-center font-Archivo text-center sm:text-xl xs:text-lg bg-sky bg-fixed h-screen p-5' style={{backgroundImage: `url(${bg})`, height: '100vh',   backgroundSize: 'cover'}} >
+          
             
                     { quiztaken ? (
-                        <>
-                            <h1>Welcome {username}!</h1>
-                            <p>You have beautiful skin</p>
-                            <div>
-                                <h2>Here are some product recommendations for you:</h2>
-                                <ul>
-                                    <Products />
-                                </ul>
+                        <>  
+                            <div className='mt-5 h-screen xs:w-5/6 sm:w-full'>
+                                <h1>Welcome {username}!</h1>
+                                <div>
+                                    <h2 className='text-lg'>Here are some product recommendations for you based on your quiz results:</h2>
+                                    <ul>
+                                        <div className='h-1/3' >
+                                        <Products />
+                                        </div>
+                                    </ul>
+                                </div>
                             </div>
                         </>
                     ) : (
-
-                        user ? (<>
-                            <h1>Take our skin quiz to get product recommendations!</h1>
-                            <Button><Link to="/quiz">Quiz</Link></Button>
-                        </>) : (
-                            <h1>Please log in</h1>
-                        )
+                        <div className='flex flex-col justify-center items-center h-screen bg-no-repeat bg-center bg-contain rounded-xl bg-none-xs'
+                        style={{backgroundImage: `url(${webpage})`, marginTop: '5'}}>
+                            {
+                            user ? (<>
+                                <h1 className='text-lg p-20'>Take our skin quiz to get product recommendations!</h1>
+                                <button className='w-64 h-12 bg-webpink text-slate-700 hover:bg-pink-600 rounded-xl'><Link to="/quiz"className='text-slate-700'>Quiz</Link></button>
+                            </>) : (
+                                <h1 className='text-lg p-20'>Please log in</h1>
+                            )}
+                        </div>
                         
                     )}
             <div>
                 
-            </div>
+            
             
         </div>
             </div>

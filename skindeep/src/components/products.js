@@ -15,41 +15,65 @@ function Products() {
             <div>Loading...</div>
         ) : (
             moisturisers.map((moisturiser, index) => (
-                <div key={index}>
-                    <img className="h-auto max-w-xs rounded-lg" src={moisturiser.img} alt="product" />
-                    <h3 className="text-right">{moisturiser.Name}</h3>
-                    <p className ="text-right">{moisturiser.Brand}</p>
+                <div key={index} className='flex flex-wrap items-center divide-y divide-slate-300 rounded-xl bg-green-100 text-right p-5 xs:text-xs'>
+                    <img className="xs:h-24 sm:h-44 m-5 border-2 border-gray-300 rounded-xl bg-white" src={moisturiser.img} alt="product" />
+                    <div className='flex flex-col xs:text-center ml-5 p-5'>
+                        <h3 className=" xs:text-lg sm:text-xl font-semibold mb-2">{moisturiser.Name}</h3>
+                        <p className ="text-gray-800 mt-2">{moisturiser.Brand}</p>
+                        <button className='sm:w-64 h-12 bg-webpink text-slate-700 hover:bg-pink-600 rounded-xl'>Learn More</button>    
+                    </div>
                 </div>
+                
             ))
         )}
     </TabPane>) },
 
         { menuItem: 'Toners', render: () => <TabPane>{toners.map((toner, index) => (
             <div key={index}>
-                    <img className="h-auto max-w-xs rounded-lg" src={toner.img} alt="product" />
-                    <h3 className="text-right">{toner.Name}</h3>
-                    <p className ="text-right">{toner.Brand}</p>
+                   <div key={index} className='flex flex-wrap items-center divide-y divide-slate-300 rounded-xl bg-orange-100 text-right p-5 xs:text-xs'>
+                    <img className="xs:h-24 sm:h-44 m-5 border-2 border-gray-300 rounded-xl bg-white" src={toner.img} alt="product" />
+                    <div className='flex flex-col xs:text-center ml-5 p-5'>
+                        <h3 className=" xs:text-lg sm:text-xl font-semibold mb-2">{toner.Name}</h3>
+                        <p className ="text-gray-800 mt-2">{toner.Brand}</p>
+                        <button className='sm:w-64 h-12 bg-webpink text-slate-700 hover:bg-pink-600 rounded-xl'>Learn More</button>    
+                    </div>
+                </div>
             </div>
         ))}</TabPane> },
         { menuItem: 'Cleansers', render: () => <TabPane>{cleansers.map((cleanser, index) => (
             <div key={index}>
-                    <img className="h-auto max-w-xs rounded-lg" src={cleanser.img} alt="product" />
-                    <h3 className="text-right">{cleanser.Name}</h3>
-                    <p className ="text-right">{cleanser.Brand}</p>
+                    <div key={index} className='flex flex-wrap items-center divide-y divide-slate-300 rounded-xl bg-purple-100 text-right p-5 xs:text-xs'>
+                    <img className="xs:h-24 sm:h-44 m-5 border-2 border-gray-300 rounded-xl bg-white" src={cleanser.img} alt="product" />
+                    <div className='flex flex-col xs:text-center ml-5 p-5'>
+                        <h3 className=" xs:text-lg sm:text-xl font-semibold mb-2 break-words">{cleanser.Name}</h3>
+                        <p className ="text-gray-800 mt-2">{cleanser.Brand}</p>
+                        <button className='sm:w-64 h-12 bg-webpink text-slate-700 hover:bg-pink-600 rounded-xl'>Learn More</button>    
+                    </div>
                 </div>
+            </div>
         ))}</TabPane> },
         { menuItem: 'Sunscreen', render: () => <TabPane>{sunscreen.map((sunscreen, index) => (
             <div key={index}>
-            <img className="h-auto max-w-xs rounded-lg" src={sunscreen.img} alt="product" />
-            <h3 className="text-right">{sunscreen.Name}</h3>
-            <p className ="text-right">{sunscreen.Brand}</p>
-        </div>
+                <div key={index} className='flex flex-wrap items-center divide-y divide-slate-300 rounded-xl bg-cyan-100 text-right p-5 xs:text-xs'>
+                    <img className="xs:h-24 sm:h-44 m-5 border-2 border-gray-300 rounded-xl bg-white" src={sunscreen.img} alt="product" />
+                    <div className='flex flex-col xs:text-center ml-5 p-5'>
+                        <h3 className=" xs:text-lg sm:text-xl font-semibold mb-2">{sunscreen.Name}</h3>
+                        <p className ="text-gray-800 mt-2">{sunscreen.Brand}</p>
+                        <button className='sm:w-64 h-12 bg-webpink text-slate-700 hover:bg-pink-600 rounded-xl'>Learn More</button>    
+                    </div>
+                </div>
+            </div>
         ))}</TabPane> },
         { menuItem: 'Eyecream', render: () => <TabPane>{eyecream.map((cream, index) => (
             <div key={index}>
-                    <img className="h-auto max-w-xs rounded-lg" src={cream.img} alt="product" />
-                    <h3 className="text-right">{cream.Name}</h3>
-                    <p className ="text-right">{cream.Brand}</p>
+                <div key={index} className='flex flex-wrap items-center divide-y divide-slate-300 rounded-xl bg-webpink text-right p-5 xs:text-xs'>
+                    <img className="xs:h-24 sm:h-44 m-5 border-2 border-gray-300 rounded-xl bg-white" src={cream.img} alt="product" />
+                    <div className='flex flex-col xs:text-center ml-5 p-5'>
+                        <h3 className=" xs:text-lg sm:text-xl font-semibold mb-2">{cream.Name}</h3>
+                        <p className ="text-gray-800 mt-2">{cream.Brand}</p>
+                        <button className='sm:w-64 h-12 bg-webpink text-slate-700 hover:bg-pink-600 rounded-xl'>Learn More</button>    
+                    </div>
+                </div>
             </div>
         ))}</TabPane>},
       ]
@@ -151,7 +175,13 @@ function Products() {
 
     
     return( 
-        <Tab panes={panes} />
+       
+            <div className='font-Archivo p-3 rounded-xl flex justify-center items-center'>
+                <div className='h-[475px] overflow-auto bg-webpink p-4 rounded-xl'>
+                    <Tab panes={panes} />
+                </div>
+            </div>
+        
     );
 }
 
