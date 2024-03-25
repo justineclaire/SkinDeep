@@ -14,68 +14,73 @@ function Products() {
         {loading ? (
             <div>Loading...</div>
         ) : (
-            moisturisers.map((moisturiser, index) => (
-                <div key={index} className='flex flex-wrap items-center divide-y divide-slate-300 rounded-xl bg-green-100 text-right p-5 xs:text-xs'>
-                    <img className="xs:h-24 sm:h-44 m-5 border-2 border-gray-300 rounded-xl bg-white" src={moisturiser.img} alt="product" />
-                    <div className='flex flex-col xs:text-center ml-5 p-5'>
-                        <h3 className=" xs:text-lg sm:text-xl font-semibold mb-2">{moisturiser.Name}</h3>
-                        <p className ="text-gray-800 mt-2">{moisturiser.Brand}</p>
-                        <button className='sm:w-64 h-12 bg-webpink text-slate-700 hover:bg-pink-600 rounded-xl'>Learn More</button>    
+            <ul className='overflow-auto h-max w-full bg-sky rounded-xl'>
+            {moisturisers.map((cream, index) => (
+                    <div key={index} className='flex flex-row flex-wrap items-center xs:justify-center m-5 divide-y divide-slate-300 rounded-xl bg-cyan-100 text-right p-5 xs:text-xs'>
+                    <img className=" border-2 h-24 w-24 border-gray-300 rounded-xl bg-white" src={cream.img} alt="product" />
+                    <div className='flex flex-col w-3/4 xs:text-center sm:text-left mx-5 p-5'>
+                        <h3 className=" xs:text-lg sm:text-xl font-semibold ">{cream.Name}</h3>
+                        <p className ="text-gray-800 ">{cream.Brand}</p>  
                     </div>
                 </div>
-                
-            ))
-        )}
+            ))}
+        </ul>)}
     </TabPane>) },
 
-        { menuItem: 'Toners', render: () => <TabPane>{toners.map((toner, index) => (
-            <div key={index}>
-                   <div key={index} className='flex flex-wrap items-center divide-y divide-slate-300 rounded-xl bg-orange-100 text-right p-5 xs:text-xs'>
-                    <img className="xs:h-24 sm:h-44 m-5 border-2 border-gray-300 rounded-xl bg-white" src={toner.img} alt="product" />
-                    <div className='flex flex-col xs:text-center ml-5 p-5'>
-                        <h3 className=" xs:text-lg sm:text-xl font-semibold mb-2">{toner.Name}</h3>
-                        <p className ="text-gray-800 mt-2">{toner.Brand}</p>
-                        <button className='sm:w-64 h-12 bg-webpink text-slate-700 hover:bg-pink-600 rounded-xl'>Learn More</button>    
+        { menuItem: 'Toners', render: () => <TabPane>
+            <ul className='overflow-auto h-max w-full bg-sky rounded-xl'>
+            {toners.map((cream, index) => (
+                    <div key={index} className='flex flex-row flex-wrap items-center xs:justify-center m-5 divide-y divide-slate-300 rounded-xl bg-cyan-100 text-right p-5 xs:text-xs'>
+                    <img className=" border-2 h-24 w-24 border-gray-300 rounded-xl bg-white" src={cream.img} alt="product" />
+                    <div className='flex flex-col w-3/4 xs:text-center sm:text-left mx-5 p-5'>
+                        <h3 className=" xs:text-lg sm:text-xl font-semibold ">{cream.Name}</h3>
+                        <p className ="text-gray-800 ">{cream.Brand}</p>  
                     </div>
                 </div>
-            </div>
-        ))}</TabPane> },
-        { menuItem: 'Cleansers', render: () => <TabPane>{cleansers.map((cleanser, index) => (
-            <div key={index}>
-                    <div key={index} className='flex flex-wrap items-center divide-y divide-slate-300 rounded-xl bg-purple-100 text-right p-5 xs:text-xs'>
-                    <img className="xs:h-24 sm:h-44 m-5 border-2 border-gray-300 rounded-xl bg-white" src={cleanser.img} alt="product" />
-                    <div className='flex flex-col xs:text-center ml-5 p-5'>
-                        <h3 className=" xs:text-lg sm:text-xl font-semibold mb-2 break-words">{cleanser.Name}</h3>
-                        <p className ="text-gray-800 mt-2">{cleanser.Brand}</p>
-                        <button className='sm:w-64 h-12 bg-webpink text-slate-700 hover:bg-pink-600 rounded-xl'>Learn More</button>    
+            ))}
+        </ul>
+            </TabPane> },
+        { menuItem: 'Cleansers', render: () => <TabPane>
+            <ul className='overflow-auto h-max w-full bg-sky rounded-xl'>
+            {cleansers.map((cleanser, index) => (
+                    <div key={index} className='flex flex-row flex-wrap items-center xs:justify-center m-5 divide-y divide-slate-300 rounded-xl bg-cyan-100 text-right p-5 xs:text-xs'>
+                    <img className=" border-2 h-24 w-24 border-gray-300 rounded-xl bg-white" src={cleanser.img} alt="product" />
+                    <div className='flex flex-col w-3/4 xs:text-center sm:text-left mx-5 p-5'>
+                        <h3 className=" xs:text-lg sm:text-xl font-semibold ">{cleanser.Name}</h3>
+                        <p className ="text-gray-800 ">{cleanser.Brand}</p>  
                     </div>
                 </div>
-            </div>
-        ))}</TabPane> },
-        { menuItem: 'Sunscreen', render: () => <TabPane>{sunscreen.map((sunscreen, index) => (
-            <div key={index}>
-                <div key={index} className='flex flex-wrap items-center divide-y divide-slate-300 rounded-xl bg-cyan-100 text-right p-5 xs:text-xs'>
-                    <img className="xs:h-24 sm:h-44 m-5 border-2 border-gray-300 rounded-xl bg-white" src={sunscreen.img} alt="product" />
-                    <div className='flex flex-col xs:text-center ml-5 p-5'>
-                        <h3 className=" xs:text-lg sm:text-xl font-semibold mb-2">{sunscreen.Name}</h3>
-                        <p className ="text-gray-800 mt-2">{sunscreen.Brand}</p>
-                        <button className='sm:w-64 h-12 bg-webpink text-slate-700 hover:bg-pink-600 rounded-xl'>Learn More</button>    
+            ))}
+        </ul>
+            </TabPane> },
+        { menuItem: 'Sunscreen', render: () => <TabPane>
+                <ul className='overflow-auto h-max w-full bg-sky rounded-xl'>
+                    {sunscreen.map((sunscreen, index) => (
+                            <div key={index} className='flex flex-row flex-wrap items-center xs:justify-center m-5 divide-y divide-slate-300 rounded-xl bg-cyan-100 text-right p-5 xs:text-xs'>
+                            <img className=" border-2 h-24 w-24 border-gray-300 rounded-xl bg-white" src={sunscreen.img} alt="product" />
+                            <div className='flex flex-col w-3/4 xs:text-center sm:text-left mx-5 p-5'>
+                                <h3 className=" xs:text-lg sm:text-xl font-semibold ">{sunscreen.Name}</h3>
+                                <p className ="text-gray-800 ">{sunscreen.Brand}</p>  
+                            </div>
+                        </div>
+                    ))}
+                </ul>
+                
+            
+        </TabPane> },
+        { menuItem: 'Eyecream', render: () => <TabPane>
+            <ul className='overflow-auto h-max w-full bg-sky rounded-xl'>
+            {eyecream.map((cream, index) => (
+                    <div key={index} className='flex flex-row flex-wrap items-center xs:justify-center m-5 divide-y divide-slate-300 rounded-xl bg-cyan-100 text-right p-5 xs:text-xs'>
+                    <img className=" border-2 h-24 w-24 border-gray-300 rounded-xl bg-white" src={cream.img} alt="product" />
+                    <div className='flex flex-col w-3/4 xs:text-center sm:text-left mx-5 p-5'>
+                        <h3 className=" xs:text-lg sm:text-xl font-semibold ">{cream.Name}</h3>
+                        <p className ="text-gray-800 ">{cream.Brand}</p>  
                     </div>
                 </div>
-            </div>
-        ))}</TabPane> },
-        { menuItem: 'Eyecream', render: () => <TabPane>{eyecream.map((cream, index) => (
-            <div key={index}>
-                <div key={index} className='flex flex-wrap items-center divide-y divide-slate-300 rounded-xl bg-webpink text-right p-5 xs:text-xs'>
-                    <img className="xs:h-24 sm:h-44 m-5 border-2 border-gray-300 rounded-xl bg-white" src={cream.img} alt="product" />
-                    <div className='flex flex-col xs:text-center ml-5 p-5'>
-                        <h3 className=" xs:text-lg sm:text-xl font-semibold mb-2">{cream.Name}</h3>
-                        <p className ="text-gray-800 mt-2">{cream.Brand}</p>
-                        <button className='sm:w-64 h-12 bg-webpink text-slate-700 hover:bg-pink-600 rounded-xl'>Learn More</button>    
-                    </div>
-                </div>
-            </div>
-        ))}</TabPane>},
+            ))}
+        </ul>
+        </TabPane>},
       ]
 
     const [user, setUser] = useState({});
@@ -177,8 +182,8 @@ function Products() {
     return( 
        
             <div className='font-Archivo p-3 rounded-xl flex justify-center items-center'>
-                <div className='h-[475px] overflow-auto bg-webpink p-4 rounded-xl'>
-                    <Tab panes={panes} />
+                <div className='sm:h-[475px] w-full overflow-auto bg-webpink p-4 rounded-xl'>
+                    <Tab className='flex flex-row flex-wrap' panes={panes} />
                 </div>
             </div>
         

@@ -109,24 +109,24 @@ app.post("/predict", (req, res) => {
 
 //search ingredients
 app.post("/search", (req, res) => {
-    const q = "SELECT * FROM `ingredients` I WHERE SOUNDEX(I.name) = SOUNDEX('?')";
+    const q = "SELECT * FROM `ingredients` I WHERE SOUNDEX(I.name) = SOUNDEX(?) OR I.name LIKE ?";
     const search = req.body.search;
-    
+    const searchLike = "%" + search + "%";
     const onlyLettersPattern = /^[A-Za-z]+$/;
-
+    
 
     if(!search.match(onlyLettersPattern)){
       return res.status(400).json({ err: "No special characters and no numbers, please!"})
     }
 
-    db.query(q, search, (err, data)=>{
-        if(err) return res.json(err);
+    db.query(q, [search, searchLike], (err, data)=>{
+        if(err) console.log(err);
         return res.json(data);
     });
 });
 
 //product info
-app.get("/prod/:pname", (req, res) => {
+app.get("/ings/:pname", (req, res) => {
     const q = "SELECT `name`, `info` FROM `ingredients` I JOIN `prod_ing` X ON X.ingid = I.id WHERE X.productid = (SELECT `id` FROM `products`p WHERE p.Name LIKE '?')";
     const pid = req.params.pname;
     console.log(pid);
@@ -136,8 +136,22 @@ app.get("/prod/:pname", (req, res) => {
     });
 });
 
+//product info
+app.post("/prods", (req, res) => {
+    const q = "SELECT `id`, `Name`, `Brand`, `img` FROM `products` P JOIN `prod_ing` X ON X.productid = P.id WHERE X.ingid = ?";
+    const ing = req.body;
+    const id = req.body.id;
+    //console.log(ing);
+    db.query(q, id, (err, data)=>{
+        if(err) return res.json(err);
+        console.log(data);
+        return res.json(data);
+    });
+});
+
+
 app.listen(8800, () => {
     console.log("Backend server is running!")
-    //getimgs();
+    //getimgs()
     
 })

@@ -4,6 +4,7 @@ import Model from './pages/model';
 import Home from './pages/home';
 import Quiz from './components/quiz';
 import Profile from './pages/profile';
+import Info from './pages/info';
 import 'semantic-ui-css/semantic.min.css'
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
         <Route exact path="/model" element={<Model />} />
         <Route exact path="/quiz" element={<Quiz />} />
         <Route exact path="/profile" element={<Profile />} />
+        <Route path="/info/:id/:name/:info" element={<Info />} />
       </Routes>
     </Router>
   );

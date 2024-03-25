@@ -89,15 +89,15 @@ function Profile() {
             
                     { quiztaken ? (
                         <>  
-                            <div className='mt-5 h-screen xs:w-5/6 sm:w-full'>
+                            <div className='flex flex-col items-center mt-5 h-screen xs:w-5/6 sm:w-full'>
                                 <h1>Welcome {username}!</h1>
                                 <div>
                                     <h2 className='text-lg'>Here are some product recommendations for you based on your quiz results:</h2>
-                                    <ul>
-                                        <div className='h-1/3' >
+                                  
+                                        <div className='md:w-[900px] xs:w-5/6 bg-webpink p-4 rounded-xl' >
                                         <Products />
                                         </div>
-                                    </ul>
+                                    
                                 </div>
                             </div>
                         </>
