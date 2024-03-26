@@ -19,7 +19,7 @@ export default function Model() {
         try {
             console.log("calling the model now", ing)
             //call predictor model
-            const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/predict`, ing)
+            const response = await axios.post('skindeep-production.up.railway.app/predict', ing)
             console.log(response.data);
             //parse response
             setPred(processPred(response.data));
