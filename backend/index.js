@@ -29,7 +29,7 @@ app.get("/", (req, res) => {
 app.get("/user/:uid", (req, res) => {
     const q = "SELECT * FROM `users` WHERE `id` = ?";
     const uid = req.params.uid;
-    //console.log(req.params.uid);
+    console.log(req.params.uid);
     connection.query(q, uid, (err, data)=>{
         if(err) return res.json("error can't find user, do the quiz!");
         return res.json(data);
