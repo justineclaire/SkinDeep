@@ -10,7 +10,7 @@ function Search() {
 
     useEffect(() => {
         if (search.length > 1) {
-            axios.post(`${process.env.REACT_APP_BACKEND_URL}/search/${search}`) 
+            axios.post(`${process.env.REACT_APP_BACKEND}/search/${search}`) 
             .then((res) => {
                 setResults(res.data);
                 console.log(res.data);
