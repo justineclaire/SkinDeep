@@ -1,7 +1,12 @@
 import sys
 import subprocess
 
+print("we inside man")
+sys.stdout.flush()
+
 def install(package):
+    print("Installing package: " + package)
+    sys.stdout.flush()
     subprocess.check_call([sys.executable, "-m", "pip", "install", package])
 
 try:
@@ -21,6 +26,9 @@ import joblib
 
 ingredients = sys.argv[1]
 
+print(ingredients + " is the ingredients in python")
+sys.stdout.flush()
+
 # clean user input
 ingredients = ingredients.lower()
 ings = ingredients.split(",")
@@ -29,6 +37,8 @@ ings = cleanUser(ings)
 # Load model using joblib
 model_joblib = joblib.load('model.joblib')
 
+print("we loaded uri model")
+sys.stdout.flush()
 # encode user input based on training data list of ingredients
 input = np.array([], dtype=int)
 
