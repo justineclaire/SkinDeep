@@ -13,7 +13,6 @@ const app = express()
 //app.use(cors())
 
 //const { connection } = require("./config.cjs");
-const cors = require('cors');
 const corsOptions ={
     origin:'https://skindeepfyp.netlify.app', 
     credentials:true,            //access-control-allow-credentials:true
