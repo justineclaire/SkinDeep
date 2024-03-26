@@ -3,9 +3,9 @@ import subprocess
 
 
 def install(package):
-    print("Installing package: " + package)
-    sys.stdout.flush()
     subprocess.check_call([sys.executable, "-m", "pip", "install", package])
+    print("installed " + package)
+    sys.stdout.flush()
 
 try:
     import numpy as np
