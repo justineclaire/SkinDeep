@@ -22,6 +22,7 @@ module.exports = {
     fontFamily: {
       'Archivo': ['Archivo', 'sans-serif'],
       'Valera': ['Valera Round', 'sans-serif'],
+      'ggoodfood': ['g Good Food', 'sans-serif'],
       sanss: ['Graphik', 'sans-serif'],
       body: [
         "Inter",

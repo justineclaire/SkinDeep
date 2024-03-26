@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 import Nav from '../components/navbar';
 import Login from  '../components/login';
 import bg from '../components/imgs/back.png';
@@ -115,23 +114,31 @@ export default function Model() {
         <div className='' >
             <Nav />
             <div className='flex flex-col justify-center items-center font-Archivo text-center sm:text-xl xs:text-lg bg-white bg-fixed h-screen p-5 overscroll-contain' style={{backgroundImage: `url(${bg})`, height: '100%', backgroundSize: 'cover', backgroundRepeat: 'no-repeat'}} >
-                <div className={` ${pred ? '' : 'mb-64'} flex xs:justify-start sm:justify-center items-center sm:w-full sm:h-full sm:mt-64 md:mt-5 xs:pt-0 sm:pt-10 pb-3 bg-no-repeat bg-center bg-contain rounded-xl bg-none-xs`} 
+                <div className={` ${pred ? '' : 'mb-64'} flex xs:justify-start sm:justify-center items-center sm:w-full h-full  md:mt-5  sm:pt-10 pb-3 bg-no-repeat bg-center bg-contain rounded-xl bg-none-xs`} 
                         style={{backgroundImage: `url(${webpage})`, marginTop: '5'}}>
-                    <form className='p-10 flex flex-col items-center justify-center w-5/6  xs:mt-48 sm:mt-0'>
-                        <div>{loading ? 'Loading...' : ''}</div>
-                        <h2 className='xs:text-sm sm:text-base md:text-xl text-wrap w-1/2 lg:w-1/3'>Enter the Ingredients list of a product for us to analyse</h2>
-                        <p className='xs:text-xs sm:text-sm text-wrap md:text-md lg:text-lg w-1/2 lg:w-1/3'>please separate them by commas (and we'll tell you what the product is good or bad for)</p>
+                    <form className='p-10 flex flex-col items-center justify-center xs:w-full sm:w-2/3 mt-5'>
+                      
+                        <h2 className='xs:text-base sm:text-base md:text-xl text-wrap w-1/2 lg:w-1/3'>Enter the Ingredients list of a product for us to analyse</h2>
+                        <p className='xs:text-base sm:text-sm text-wrap md:text-md lg:text-lg w-1/2 lg:w-1/3'>please separate them by commas (and we'll tell you what the product is good or bad for)</p>
                         <input type='text'  
-                                className='rounded-lg xs:p-1 sm:p-2 w-1/3 lg:w-1/4 xs:text-xs sm:text-sm md:text-md lg:text-lg '
+                                className='rounded-lg xs:p-1 sm:p-2 w-1/3 lg:w-1/4 xs:text-sm sm:text-base md:text-md lg:text-lg '
                                 placeholder='Ingredients' 
                                 name='ingredients' 
                                 value={ing.ingredients} 
                                 onChange={handleChange} />
-                        <button 
-                            className='rounded-lg bg-sky xs:p-1 sm:p-2 sm:m-2 xs:text-xs sm:text-sm md:text-md lg:text-lg'
-                            onClick={handleClick}>
-                            Submit
-                        </button>
+                              <>
+                        {loading ? (
+                            <button 
+                                className='rounded-lg bg-red-300 text-white xs:p-1 sm:p-2 sm:m-2 xs:text-xs sm:text-sm md:text-md lg:text-lg'>
+                                Loading
+                            </button>
+                            ): (
+                            <button 
+                                className='rounded-lg bg-sky xs:p-1 sm:p-2 sm:m-2 xs:text-xs sm:text-sm md:text-md lg:text-lg'
+                                onClick={handleClick}>
+                                Submit
+                            </button>)}
+                        </>
                         
 
                     </form>

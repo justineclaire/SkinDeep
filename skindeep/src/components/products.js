@@ -197,7 +197,7 @@ function Products() {
     return( 
        
             <div className='font-Archivo p-3 rounded-xl flex justify-center items-center'>
-                <div className='sm:h-[475px] w-full overflow-auto bg-webpink p-4 rounded-xl'>
+                <div className='sm:h-[475px] w-full overflow-auto bg-webpink p-4 rounded-xl overspill-contain'>
                     <Tab className='flex flex-row flex-wrap' panes={panes} />
                 </div>
             </div>

@@ -24,19 +24,17 @@ function Search() {
     }, [search]); 
 
     return (
-        <div className='flex flex-col h-max font-Archivo'>
-            <div className='flex flex-row'>
+        <div className='flex flex-col h-max font-Archivo relative'>
+            <div className='flex flex-row items-center justify-center'>
                 <input
-                    className='p-2 rounded-xl mb-2 mt-60 md:mt-44 lg:mt-80 sm:w-96 px-8 py-5 xs:w-64 bg-blue-100 text-slate-700'
-                    placeholder="Search Ingredient info..."
+                    className='p-2 rounded-xl mb-2 h-8 sm:w-96 px-8 py-5 m-5 xs:w-64 bg-blue-100 text-slate-700'
+                    placeholder="Search for an ingredient..."
                     type="text"
                     onChange={(e) => setSearch(e.target.value)}
                     />
-                <button className='p-2 rounded-xl mb-2 mt-60 md:mt-44 lg:mt-80 px-8 py-5 bg-blue-100 text-slate-700'>
-                    Search
-                </button>
+                
             </div>
-            <ul className=' bg-white rounded-lg divide-y divide-slate-700'>
+            <ul className=' absolute z-10 mt-20 bg-white rounded-lg divide-y divide-slate-700'>
                 {results.slice(0,3).map((result) => (
                     <div className='flex flex-col p-5 hover:bg-amber-100'>
                         <Link 

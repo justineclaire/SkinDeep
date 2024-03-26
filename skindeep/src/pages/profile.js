@@ -7,7 +7,6 @@ import {
   } from "firebase/auth";
 import { auth } from "../firebase";  
 import axios from 'axios';
-import { button } from 'semantic-ui-react';
 import bg from '../components/imgs/back.png';
 import webpage from '../components/imgs/webpage.png';
 
@@ -84,18 +83,18 @@ function Profile() {
         
         <div className='' >
             <Nav />
-        <div className=' text-slate-700 flex flex-col justify-start items-center font-Archivo text-center sm:text-xl xs:text-lg bg-sky bg-fixed h-screen p-5' style={{backgroundImage: `url(${bg})`, height: '100vh',   backgroundSize: 'cover'}} >
-          
+            <div className='flex flex-col justify-center items-center font-Archivo text-center sm:text-xl xs:text-lg bg-sky bg-fixed h-screen p-5 overflow-auto' style={{backgroundImage: `url(${bg})`, height: '100%', backgroundSize: 'cover', backgroundRepeat: 'no-repeat'}} >
+                
             
                     { quiztaken ? (
                         <>  
                             <div className='flex flex-col items-center mt-5 h-screen xs:w-5/6 sm:w-full'>
-                                <h1>Welcome {username}!</h1>
+                                <h1 className='font-ggoodfood text-pink-700'>Welcome {username}!</h1>
                                 <div>
-                                    <h2 className='text-lg'>Here are some product recommendations for you based on your quiz results:</h2>
-                                  
-                                        <div className='md:w-[760px] xs:w-[300px] lg:w-[900px] bg-webpink p-4 rounded-xl' >
-                                        <Products />
+                                    <h2 className='xs:text-sm p-2 sm:text-lg'>Here are some product recommendations for you based on your quiz results:</h2>
+                                    <p className='xs:text-sm p-2 sm:text-lg' >Feel free to re-do the quiz to change your skin profile and recommendations</p>
+                                        <div className='md:w-[760px] xs:w-[300px] lg:w-[900px] sm:w-[580px] bg-webpink p-4 rounded-xl' >
+                                            <Products />
                                         </div>
                                     
                                 </div>

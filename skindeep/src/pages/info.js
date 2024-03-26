@@ -1,12 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 import Nav from '../components/navbar';
-import Login from  '../components/login';
 import bg from '../components/imgs/back.png';
 import { useParams } from "react-router-dom";
-import webpage from '../components/imgs/webpage.png';
-import bubble from '../components/imgs/bubblesquare.png';
 
 
 function Info() {
@@ -18,11 +14,10 @@ function Info() {
         axios.post('http://localhost:8800/prods', {id: id}) 
         .then((res) => {
             setProds(res.data);
-            //console.log(res.data);
         })
         .catch((err) => console.log(err));
         
-    }, []);
+    }, [id]);
     
    
 
