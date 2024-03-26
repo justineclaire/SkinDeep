@@ -11,7 +11,7 @@ function Info() {
     const [prods, setProds] = useState([]);
 
     useEffect(() => {
-        axios.post('http://localhost:8800/prods', {id: id}) 
+        axios.post(`${process.env.REACT_APP_BACKEND_URL}/prods`, {id: id}) 
         .then((res) => {
             setProds(res.data);
         })

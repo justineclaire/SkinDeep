@@ -41,7 +41,7 @@ function Profile() {
         useEffect(() => {
             try {
                 if(user) {
-                    axios.get(`http://localhost:8800/user/${uid}`)
+                    axios.get(`${process.env.REACT_APP_BACKEND_URL}/user/${uid}`)
                     .then(res => {
                         if (res.data.length > 0) {
                             setQuizTaken(true);
@@ -64,7 +64,7 @@ function Profile() {
             try {
                 if(quiztaken && user) {                
                     try{
-                        axios.get(`http://localhost:8800/recs/${user.uid}`)
+                        axios.get(`${process.env.REACT_APP_BACKEND_URL}/recs/${user.uid}`)
                         .then(recs => {
                             setRecList(recs.data);
                         })

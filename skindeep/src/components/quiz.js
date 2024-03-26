@@ -77,7 +77,7 @@ function Quiz() {
         e.preventDefault();
     
         console.log(userResponses);
-        axios.post('http://localhost:8800/createprof', userResponses) 
+        axios.post(`${process.env.REACT_APP_BACKEND_URL}/createprof`, userResponses) 
         .then((res) => {
         navigate('/profile');
         console.log(res)
