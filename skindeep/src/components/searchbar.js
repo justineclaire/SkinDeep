@@ -10,18 +10,19 @@ function Search() {
 
     useEffect(() => {
         if (search.length > 1) {
-            axios.post(`${process.env.REACT_APP_BACKEND}/search/${search}`) 
+            axios.get(`${process.env.REACT_APP_BACKEND}/search?word=${search}`) 
             .then((res) => {
                 setResults(res.data);
                 console.log(res.data);
             })
             .catch((err) => console.log(err));
         }
-
+    
         if (search.length === 0) {
             setResults([]);
         }
-    }, [search]); 
+    }, [search]);
+    
 
     return (
         <div className='flex flex-col h-max font-Archivo relative'>

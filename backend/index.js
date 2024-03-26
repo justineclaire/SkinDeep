@@ -108,15 +108,14 @@ app.post("/predict", (req, res) => {
 
 
 //search ingredients
-app.post("/search/:word", (req, res) => {
+app.get("/search", (req, res) => {
     const q = "SELECT * FROM `ingredients` I WHERE SOUNDEX(I.name) = SOUNDEX(?) OR I.name LIKE ?";
-    const word = req.params.word;
+    const word = req.query.word; // Access the search term from query parameters
     console.log(word);
     const wordLike = "%" + word + "%";
 
     connection.query(q, [word, wordLike], (err, data)=>{
         if(err) console.log(err);
-        //console.log(data);
         return res.json(data);
     });
 });

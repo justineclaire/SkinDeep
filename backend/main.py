@@ -1,8 +1,6 @@
 import sys
 import subprocess
 
-print("we inside man")
-sys.stdout.flush()
 
 def install(package):
     print("Installing package: " + package)
