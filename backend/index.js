@@ -7,18 +7,13 @@ import {metaphone} from 'metaphone'
 import showimg from "./prodimgs.js";
 import fs from "fs";
 import getimgs from "./webscrapeimgs.js";
+import connection from "./config.cjs";
 
 const app = express()
 app.use(cors())
 app.use(express.json())
+//const { connection } = require("./config.cjs");
 
-// database connections and methods
-const db = mysql.createConnection({
-    host: "localhost",
-    user: 'root',
-    password: '',
-    database: 'skinDB'
-})
 
 app.use(express.json())
 
@@ -30,7 +25,7 @@ app.get("/user/:uid", (req, res) => {
     const q = "SELECT * FROM `users` WHERE `id` = ?";
     const uid = req.params.uid;
     //console.log(req.params.uid);
-    db.query(q, uid, (err, data)=>{
+    connection.query(q, uid, (err, data)=>{
         if(err) return res.json("error can't find user, do the quiz!");
         return res.json(data);
     })
@@ -42,12 +37,12 @@ app.get("/recs/:uid", (req, res) => {
     const uid = req.params.uid;
     const q2 = "SELECT * FROM `users` WHERE `id` = ?";
 
-    db.query(q, (err, data)=>{
+    connection.query(q, (err, data)=>{
         if(err) return res.json(err);
         const prods = data;
 
         
-        db.query(q2, uid, (err, data) => {
+        connection.query(q2, uid, (err, data) => {
             if(err) return res.json(err);
             const user = data;
             //console.log(user);
@@ -83,7 +78,7 @@ app.post("/createprof", (req, res) => {
     ] 
     console.log(req.body.skintype);
     console.log(q);
-    db.query(q, [info], (err, data)=>{
+    connection.query(q, [info], (err, data)=>{
         if(err) return res.json(err);
         return res.json(data);
     });
@@ -121,7 +116,7 @@ app.post("/search", (req, res) => {
     }
     
 
-    db.query(q, [search, searchLike], (err, data)=>{
+    connection.query(q, [search, searchLike], (err, data)=>{
         if(err) console.log(err);
         //console.log(data);
         return res.json(data);
@@ -133,7 +128,7 @@ app.post("/ings", (req, res) => {
     const q = "SELECT `name`, `info` FROM `ingredients` I JOIN `prod_ing` X ON X.ingid = I.id WHERE X.productid = ?";
     const pid = req.body.id;
    
-    db.query(q, pid, (err, data)=>{
+    connection.query(q, pid, (err, data)=>{
         if(err) return res.json(err);
         return res.json(data);
     });
@@ -145,7 +140,7 @@ app.post("/prods", (req, res) => {
     const ing = req.body;
     const id = req.body.id;
     //console.log(ing);
-    db.query(q, id, (err, data)=>{
+    connection.query(q, id, (err, data)=>{
         if(err) return res.json(err);
         console.log(data);
         return res.json(data);
