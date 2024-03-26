@@ -113,13 +113,6 @@ app.post("/search/:word", (req, res) => {
     const word = req.params.word;
     console.log(word);
     const wordLike = "%" + word + "%";
-    const onlyLettersPattern = /^[A-Za-z]+$/;
-    
-
-    if(!search.match(onlyLettersPattern)){
-      return res.status(400).json({ err: "No special characters and no numbers, please!"})
-    }
-    
 
     connection.query(q, [word, wordLike], (err, data)=>{
         if(err) console.log(err);
