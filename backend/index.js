@@ -93,7 +93,7 @@ app.post("/createprof", (req, res) => {
 //predictor model endpoint
 app.post("/predict", (req, res) => {
     const arg1 = req.body.ingredients;
-    
+    console.log(arg1);
     const pythonProcess = spawn('python',["./main.py", arg1]);
     pythonProcess.stdout.on('data', (data) => {
         console.log(data.toString());
