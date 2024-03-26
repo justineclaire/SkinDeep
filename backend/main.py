@@ -1,6 +1,20 @@
 import sys
-import numpy as np
-import pandas as pd
+import subprocess
+
+def install(package):
+    subprocess.check_call([sys.executable, "-m", "pip", "install", package])
+
+try:
+    import numpy as np
+except ModuleNotFoundError:
+    install('numpy')
+
+try:
+    import pandas as pd
+except ModuleNotFoundError:
+    install('pandas')
+
+
 from cleanUser import cleanUser
 import joblib
 '''Predicts skin concerns based on user inputted ingredients'''
