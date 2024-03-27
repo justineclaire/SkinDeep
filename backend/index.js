@@ -29,7 +29,7 @@ app.get("/", (req, res) => {
 app.get("/user/:uid", (req, res) => {
     const q = "SELECT * FROM `users` WHERE `id` = ?";
     const uid = req.params.uid;
-    console.log(req.params.uid);
+    
     connection.query(q, uid, (err, data)=>{
         if(err) return res.json("error can't find user, do the quiz!");
         return res.json(data);
@@ -50,7 +50,7 @@ app.get("/recs/:uid", (req, res) => {
         connection.query(q2, uid, (err, data) => {
             if(err) return res.json(err);
             const user = data;
-            //console.log(user);
+            
             try {
                 const reclist = recs(prods, user);
                 return res.json(reclist);
@@ -81,8 +81,7 @@ app.post("/createprof", (req, res) => {
         req.body.hyper,
         req.body.name
     ] 
-    console.log(req.body.skintype);
-    console.log(q);
+     
     connection.query(q, [info], (err, data)=>{
         if(err) return res.json(err);
         return res.json(data);
@@ -93,7 +92,7 @@ app.post("/createprof", (req, res) => {
 //predictor model endpoint
 app.post("/predict", (req, res) => {
     const arg1 = req.body.ingredients;
-    console.log(arg1);
+    
     const pythonProcess = spawn('python',["./main.py", arg1]);
     pythonProcess.stdout.on('data', (data) => {
         console.log(data.toString());
@@ -111,7 +110,7 @@ app.post("/predict", (req, res) => {
 app.get("/search", (req, res) => {
     const q = "SELECT * FROM `ingredients` I WHERE SOUNDEX(I.name) = SOUNDEX(?) OR I.name LIKE ?";
     const word = req.query.word; // Access the search term from query parameters
-    console.log(word);
+    
     const wordLike = "%" + word + "%";
 
     connection.query(q, [word, wordLike], (err, data)=>{
@@ -136,10 +135,10 @@ app.post("/prods", (req, res) => {
     const q = "SELECT `id`, `Name`, `Brand`, `img` FROM `products` P JOIN `prod_ing` X ON X.productid = P.id WHERE X.ingid = ?";
     const ing = req.body;
     const id = req.body.id;
-    //console.log(ing);
+    
     connection.query(q, id, (err, data)=>{
         if(err) return res.json(err);
-        console.log(data);
+        
         return res.json(data);
     });
 });
