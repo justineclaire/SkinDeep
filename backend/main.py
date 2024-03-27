@@ -8,8 +8,6 @@ import joblib
 
 ingredients = sys.argv[1]
 
-print(ingredients + " is the ingredients in python")
-sys.stdout.flush()
 
 # clean user input
 ingredients = ingredients.lower()
