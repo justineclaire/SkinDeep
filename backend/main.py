@@ -16,8 +16,6 @@ ings = cleanUser(ings)
 
 # Load model using joblib
 model_joblib = joblib.load('model.joblib')
-print("model loaded")
-sys.stdout.flush()
 
 # encode user input based on training data list of ingredients
 input = np.array([], dtype=int)
