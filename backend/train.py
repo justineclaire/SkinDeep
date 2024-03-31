@@ -36,7 +36,9 @@ X = ingredients_dummies
 x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 # Train the model
-rf = RandomForestClassifier()
+rf = RandomForestClassifier(max_depth=2, n_estimators=30,
+    min_samples_split=3, max_leaf_nodes=5,
+    random_state=22)
 trainedModel = rf.fit(x_train, y_train)
 
 def getCols():
