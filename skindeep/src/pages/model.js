@@ -119,6 +119,7 @@ export default function Model() {
                     <form className='p-10 flex flex-col items-center justify-center xs:w-full sm:w-2/3 mt-5'>
                       
                         <h2 className='xs:text-base sm:text-base md:text-xl text-wrap w-1/2 lg:w-1/3'>Enter the Ingredients list of a product for us to analyse</h2>
+                        <p className='xs:text-sm sm:text-xs text-wrap md:text-md lg:text-md w-1/2 lg:w-1/3 italic'>e.g. copy and paste the ingredients list of a product you use</p>
                         <p className='xs:text-base sm:text-sm text-wrap md:text-md lg:text-lg w-1/2 lg:w-1/3'>please separate them by commas (and we'll tell you what the product is good or bad for)</p>
                         <input type='text'  
                                 className='rounded-lg xs:p-1 sm:p-2 w-1/3 lg:w-1/4 xs:text-sm sm:text-base md:text-md lg:text-lg '

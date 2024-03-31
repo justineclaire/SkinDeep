@@ -111,7 +111,7 @@ function Login() {
         <div id='profbtn' className='mx-10'>
               <button className='flex flex-row xs:px-2 xs:py-2 md:px-7 md:py-5 border-2 text-white tracking-wide justify-between items-center h-full rounded-lg bg-blue-400 hover:bg-pink-600' ><Link to='/profile' className='flex text-white items-center'>
                 <img className='h-10 w-10 xs:h-4 xs:w-4'src={heart} />
-              <span className='font-ggoodfood px-3 xs:px-0'>  My Profile  </span>
+              <span className='font-ggoodfood text-white px-3 xs:px-0'>  My Profile  </span>
               </Link></button>
         </div>
       
