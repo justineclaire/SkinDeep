@@ -112,8 +112,9 @@ export default function Model() {
 
     return (
         <div className='' >
-            <Nav />
+            
             <div className='flex flex-col justify-center items-center font-Archivo text-center sm:text-xl xs:text-lg bg-white bg-fixed h-screen p-5 overscroll-contain' style={{backgroundImage: `url(${bg})`, height: '100%', backgroundSize: 'cover', backgroundRepeat: 'no-repeat'}} >
+            <Nav />
                 <div className={` ${pred ? '' : 'mb-64'} flex xs:justify-start sm:justify-center items-center sm:w-full h-full  md:mt-5  sm:pt-10 pb-3 bg-no-repeat bg-center bg-contain rounded-xl bg-none-xs`} 
                         style={{backgroundImage: `url(${webpage})`, marginTop: '5'}}>
                     <form className='p-10 flex flex-col items-center justify-center xs:w-full sm:w-2/3 mt-5'>

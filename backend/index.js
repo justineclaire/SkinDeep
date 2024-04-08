@@ -65,7 +65,7 @@ app.get("/recs/:uid", (req, res) => {
 
 
 //profile creation endpoint
-app.post("/createprof", (req, res) => {
+app.put("/createprof", (req, res) => {
     const q = "INSERT INTO `users` (id, skintype, sens, acne, ageing, bright, bh, red, tex, barrier, hyper, name) VALUES (?)";
     const info =[
         req.body.uid,
@@ -90,6 +90,36 @@ app.post("/createprof", (req, res) => {
 });
 
 
+//profile update endpoint
+app.post("/updateprof", (req, res) => {
+    const q = "UPDATE `users` SET `skintype` = ?, `sens` = ?, `acne` = ?, `ageing` = ?, `bright` = ?, `bh` = ?, `red` = ?, `tex` = ?, `barrier` = ?, `hyper` = ? WHERE `id` = ?";
+    const info = [
+        req.body.skintype,
+        req.body.sensitive,
+        req.body.acne,
+        req.body.age,
+        req.body.bright,
+        req.body.bh,
+        req.body.red,
+        req.body.tex,
+        req.body.barrier,
+        req.body.hyper,
+        req.body.uid 
+    ];
+
+    console.log(req.body.skintype);
+    console.log(q);
+
+    db.query(q, info, (err, data) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).json({ error: "Internal server error" });
+        }
+        return res.json(data);
+    });
+});
+
+
 //predictor model endpoint
 app.post("/predict", (req, res) => {
     const arg1 = req.body.ingredients;
@@ -108,9 +138,9 @@ app.post("/predict", (req, res) => {
 
 
 //search ingredients
-app.post("/search", (req, res) => {
+app.get("/search/:search", (req, res) => {
     const q = "SELECT * FROM `ingredients` I WHERE SOUNDEX(I.name) = SOUNDEX(?) OR I.name LIKE ?";
-    const search = req.body.search;
+    const search = req.params.search;
     console.log(search);
     const searchLike = "%" + search + "%";
     const onlyLettersPattern = /^[A-Za-z]+$/;
@@ -120,7 +150,6 @@ app.post("/search", (req, res) => {
       return res.status(400).json({ err: "No special characters and no numbers, please!"})
     }
     
-
     db.query(q, [search, searchLike], (err, data)=>{
         if(err) console.log(err);
         //console.log(data);
@@ -129,10 +158,10 @@ app.post("/search", (req, res) => {
 });
 
 //product info
-app.post("/ings", (req, res) => {
+app.get("/ings/:pid", (req, res) => {
     const q = "SELECT `name`, `info` FROM `ingredients` I JOIN `prod_ing` X ON X.ingid = I.id WHERE X.productid = ?";
-    const pid = req.body.id;
-   
+    const pid = req.params.pid;
+   console.log(pid);
     db.query(q, pid, (err, data)=>{
         if(err) return res.json(err);
         return res.json(data);
@@ -140,14 +169,12 @@ app.post("/ings", (req, res) => {
 });
 
 //product info
-app.post("/prods", (req, res) => {
+app.get("/prods/:id", (req, res) => {
     const q = "SELECT `id`, `Name`, `Brand`, `img` FROM `products` P JOIN `prod_ing` X ON X.productid = P.id WHERE X.ingid = ?";
-    const ing = req.body;
-    const id = req.body.id;
+    const id = req.params.id;
     //console.log(ing);
     db.query(q, id, (err, data)=>{
         if(err) return res.json(err);
-        console.log(data);
         return res.json(data);
     });
 });

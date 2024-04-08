@@ -6,6 +6,7 @@ import {
 import { auth } from "../firebase";  
 import axios from 'axios';
 import Analysis from './analysis';
+const { getJson } = require("serpapi");
 
 function Products() {
 
@@ -16,6 +17,19 @@ function Products() {
         setSelectedCream(cream);
         setModalOpen(!modalOpen);
     };
+
+   
+    getJson({
+        api_key: "01f16418deb6245a82e93551520fd4f83dcd0b53c1c19a77843042f2624fa5ce",
+        engine: "google",
+        q: "Creme de la mer la mer",
+        google_domain: "google.ie",
+        gl: "ie",
+        hl: "en",
+        tbm: "shop"
+        }, (json) => {
+        console.log(json);
+    });
 
 
     const panes = [

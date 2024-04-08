@@ -14,7 +14,11 @@ import bg from '../components/imgs/back.png';
 function Quiz() {
 
     const [user, setUser] = useState({});
+    const [quiztaken, setQuizTaken] = useState(false);
     const navigate = useNavigate();
+    const [errorMessage, setErrorMessage] = useState("");
+    const [current, setCurrent] = useState(0);
+    const [selected, setSelected] = useState("");
     const [userResponses, setUserResponses] = useState({
         uid: '',
         name: '',
@@ -44,40 +48,65 @@ function Quiz() {
         };
     }, []);
 
-    const [errorMessage, setErrorMessage] = useState("");
-    const [current, setCurrent] = useState(0);
-    const [selected, setSelected] = useState("");
+    useEffect(() => {
+        try {
+            if(user) {
+                axios.get(`http://localhost:8800/user/${user.uid}`)
+                .then(res => {
+                    if (res.data.length > 0) {
+                        setQuizTaken(true);
+                    } else {
+                        setQuizTaken(false);
+                    }
+                    
+                })
+            }
+        } catch (error) {
+            console.log(error);
+            console.log("from profile.js")
+        }
+        
+    }, [user]); 
+   
 
 
     const chosenAnswer = (ans) => {
         if(ans.includes("Yes")) {
-            setUserResponses({...userResponses, [questions[current].key]: true})
+            setUserResponses(prevState => ({...prevState, [questions[current].key]: true}));
         }
         else if(ans.includes("No")) {
-            setUserResponses({...userResponses, [questions[current].key]: false})
+            setUserResponses(prevState => ({...prevState, [questions[current].key]: false}));
         }
         else if(ans.includes("Oily") || ans.includes("Dry") || ans.includes("Combination") || ans.includes("Normal")) {
-            setUserResponses({...userResponses, [questions[current].key]: ans})
+            setUserResponses(prevState => ({...prevState, [questions[current].key]: ans}));
         }
         setSelected(ans);
+        console.log(userResponses);
     }
+    
 
     const handleNext = () => {
         if (userResponses[questions[current].key] === null) {
-            setErrorMessage("Please select an answer");
+            setErrorMessage("Please select an answer before moving on");
             setTimeout(() => {setErrorMessage("")}, 3000);
             return;
         } else {
             setSelected("");
             setCurrent(current + 1);
         }
-    }
+    };
+
+    const handlePrevious = () => {
+        setSelected("");
+        setCurrent(current - 1);
+    
+    };
 
     const submit = async (e) => {
         e.preventDefault();
     
         console.log(userResponses);
-        axios.post('http://localhost:8800/createprof', userResponses) 
+        axios.put('http://localhost:8800/createprof', userResponses) 
         .then((res) => {
         navigate('/profile');
         console.log(res)
@@ -86,11 +115,40 @@ function Quiz() {
         
     }
 
+    const update = async (e) => {
+        e.preventDefault();
+        let updatedResponses = {
+            skintype: userResponses.skintype,
+            sensitive: userResponses.sensitive,
+            acne: userResponses.acne,
+            age: userResponses.age,
+            bright: userResponses.bright,
+            bh: userResponses.bh,
+            red: userResponses.red,
+            tex: userResponses.tex,
+            barrier: userResponses.barrier,
+            hyper: userResponses.hyper,
+            uid: userResponses.uid
+        }
+        // Check if updatedResponses is not empty
+        if (Object.keys(updatedResponses).length !== 0) {
+            axios.post('http://localhost:8800/updateprof', updatedResponses)
+            .then((res) => {
+                navigate('/profile');
+                console.log(res);
+            })
+            .catch((err) => console.log(err));
+        } else {
+            console.log("updatedResponses is empty");
+        }
+    }
+
     
 return (
-    <div className='' >
+    <div className='bg-cover' style={{backgroundImage: `url(${bg})`, height: '100vh',   backgroundSize: 'cover'}}  >
         <Nav />
-        <div className='content font-Archivo text-center sm:text-xl xs:text-lg bg-sky bg-cover flex justify-center items-center' style={{backgroundImage: `url(${bg})`, height: '100vh',   backgroundSize: 'cover'}} >
+        <div className='content font-Archivo text-center sm:text-xl xs:text-lg  flex justify-center items-center' >
+        
         { !user ? (
             <div className='quiz bg-pink-100 rounded-xl w-2/3 h-2/3'>
                     <div className=''>please login first</div>
@@ -127,20 +185,26 @@ return (
                     </div>
                        {current < questions.length - 1 ? (
                         <div className='flex justify-center items-center'>
+                            {current !== 0 ? (
+                                <button className='rounded-xl w-64 h-12 bg-webpink hover:bg-pink-700'
+                                onClick={() => {handlePrevious()}}
+                                    >
+                                ⬅️ Previous</button>
+                            ): ''}
                         
                           <button 
-                            className='w-64 h-12 bg-webpink'
+                            className='rounded-xl w-64 h-12 bg-webpink hover:bg-pink-700'
                             onClick={() => {handleNext()}}
                           >
                             Next ➡️
                           </button >
-                       {errorMessage.length > 0 && <Message color='red'>{errorMessage}</Message>}
+                       {errorMessage.length > 0 ? ( <Message negative>{errorMessage}</Message>) : ''}
                       </div>
                       ) : (
                             <button 
                                 className='rounded-xl w-64 h-12 bg-webpink'
                                 type='submit'
-                                onClick={(e) => submit(e)}
+                                onClick={quiztaken ? (e) => update(e) : (e) => submit(e)}
                             >
                             Submit 
                             </button >

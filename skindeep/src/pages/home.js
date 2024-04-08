@@ -11,9 +11,10 @@ function Home() {
         <div className='' >
             
             <div className="flex flex-col justify-center" >
-                <Nav />
+               
             
                 <div className='flex flex-col justify-center items-center font-Archivo text-center bg-white bg-fixed h-screen p-5 overscroll-contain' style={{backgroundImage: `url(${bg})`, height: '100%', backgroundSize: 'cover', backgroundRepeat: 'no-repeat'}} >
+                <Nav />
                <div className=''>
                         <img className=''src={logo} alt="Skin deep" />
                         

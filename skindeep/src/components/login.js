@@ -109,16 +109,16 @@ function Login() {
     return(
       <div className='flex flex-row'>
         <div id='profbtn' className='mx-10'>
-              <button className='flex flex-row xs:px-2 xs:py-2 md:px-7 md:py-5 border-2 text-white tracking-wide justify-between items-center h-full rounded-lg bg-blue-400 hover:bg-pink-600' ><Link to='/profile' className='flex text-white items-center'>
-                <img className='h-10 w-10 xs:h-4 xs:w-4'src={heart} />
+              <button className='flex flex-row xs:px-2 xs:py-2 md:px-7 md:py-5 text-white tracking-wide justify-between items-center h-full rounded-lg bg-pink-600 hover:bg-pink-100' >
+                <Link to='/profile' className='flex text-white items-center'>
               <span className='font-ggoodfood px-3 xs:px-0'>  My Profile  </span>
               </Link></button>
         </div>
       
           
           <div id='logbtn'>
-              <button className='flex flex-row xs:px-2 xs:py-2 md:px-7 md:py-5 border-2 text-white tracking-wide justify-between items-center h-full rounded-lg bg-blue-400 hover:bg-pink-600' onClick={logout}>
-                <img className='h-10 w-10 xs:h-4 xs:w-4' src={heart} />
+              <button className='flex flex-row xs:px-2 xs:py-2 md:px-7 md:py-5 text-white tracking-wide justify-between items-center h-full rounded-lg bg-pink-600 hover:bg-pink-100' onClick={logout}>
+                
                 <span className='font-ggoodfood px-3 xs:px-0'> Log out </span></button>
           </div>
       </div>
@@ -130,9 +130,9 @@ function Login() {
     return (
       <>
       <div id='logbtn'>
-            <button className='flex flex-row px-7 py-5 border-2 text-white tracking-wide justify-between items-center h-full rounded-lg bg-blue-600 hover:bg-pink-600' type="button"
-            onClick={() => setShowModal(true)}><img className='h-10 w-10 xs:h-4 xs:w-4'src={heart} />
-            <span className='font-Archivo px-3 xs:px-0'> Login </span><img className='h-10 w-10 xs:h-4 xs:w-4'src={heart} /></button>
+            <button className='flex flex-row px-7 py-5 text-white tracking-wide justify-between items-center h-full rounded-lg bg-pink-600 hover:bg-pink-100' type="button"
+            onClick={() => setShowModal(true)}>
+            <span className='font-ggoodfood px-3 xs:px-0'> Login </span></button>
       </div>
         
 
@@ -152,7 +152,7 @@ function Login() {
                     
                   </div>
                   {/*body*/}
-                  <form className="p-5 m-2 font-Archivo">
+                  <form className="p-5 m-2 font-ggoodfood">
                     
                     <div className="flex flex-col py-4">
                       <label className='mx-2' >Email address</label>
@@ -178,9 +178,9 @@ function Login() {
                         />
                     </div>
                     <div>
-                      <button className='flex flex-row px-2 py-4 border-2 text-white tracking-wide justify-between items-center h-full rounded-lg bg-blue-600 hover:bg-pink-600' type="button"
+                      <button className='flex flex-row px-2 py-4 text-white tracking-wide justify-between items-center h-full rounded-lg bg-blue-600 hover:bg-pink-600' type="button"
                         onClick={login}>
-                        <span className='font-Archivo px-3 xs:px-0'>
+                        <span className='font-ggoodfood px-3 xs:px-0'>
                            Login 
                         </span></button>
                       {errorMessage && (
@@ -201,10 +201,10 @@ function Login() {
                       Close
                     </button>
                     <button className='flex flex-row px-2 py-4 border-2 text-white tracking-wide justify-between items-center h-full rounded-lg bg-blue-600 hover:bg-pink-600' type="button"
-                        onClick={changeAuthMode}><img className='h-10 w-10 xs:h-4 xs:w-4'src={heart} />
-                        <span className='font-Archivo px-3 xs:px-0'>
+                        onClick={changeAuthMode}>
+                        <span className='font-ggoodfood px-3 xs:px-0'>
                            Create Account </span>
-                           <img className='h-10 w-10 xs:h-4 xs:w-4'src={heart} /></button>
+                           </button>
                       
                   </div>
                 </div>
@@ -219,9 +219,9 @@ function Login() {
     return (
       <>
       <div id='logbtn'>
-            <button className='flex flex-row px-7 py-5 border-2 text-white tracking-wide justify-between items-center h-full rounded-lg bg-blue-600 hover:bg-pink-600' type="button"
-            onClick={() => setShowModal(true)}><img className='h-10 w-10 xs:h-4 xs:w-4'src={heart} />
-            <span className='font-Archivo px-3 xs:px-0'> Login </span><img className='h-10 w-10 xs:h-4 xs:w-4'src={heart} /></button>
+            <button className='flex flex-row px-7 py-5 text-white tracking-wide justify-between items-center h-full rounded-lg bg-pink-600 hover:bg-pink-200' type="button"
+            onClick={() => setShowModal(true)}>
+            <span className='font-ggoodfood px-3 xs:px-0'> Login </span></button>
       </div>
 
         {showModal ? (
@@ -240,7 +240,7 @@ function Login() {
                     
                   </div>
                   {/*body*/}
-                  <form className="p-5 m-2 font-Archivo">
+                  <form className="p-5 m-2 font-ggoodfood">
 
                   <div className="flex flex-col py-4">
                       <label className='mx-2' >Name</label>
@@ -280,7 +280,7 @@ function Login() {
                     <div>
                       <button className='flex flex-row px-2 py-4 border-2 text-white tracking-wide justify-between items-center h-full rounded-lg bg-blue-600 hover:bg-pink-600' type="button"
                         onClick={register}>
-                        <span className='font-Archivo px-3 xs:px-0'>
+                        <span className='font-ggoodfood px-3 xs:px-0'>
                            Create Account
                         </span></button>
                       {errorMessage && (
@@ -302,10 +302,9 @@ function Login() {
                     </button>
                     
                     <button className='flex flex-row px-2 py-4 border-2 text-white tracking-wide justify-between items-center h-full rounded-lg bg-blue-600 hover:bg-pink-600' type="button"
-                        onClick={changeAuthMode}><img className='h-10 w-10 xs:h-4 xs:w-4'src={heart} />
-                        <span className='font-Archivo px-3 xs:px-0'>
-                           Existing account? </span>
-                           <img className='h-10 w-10 xs:h-4 xs:w-4'src={heart} /></button>
+                        onClick={changeAuthMode}>
+                        <span className='font-ggoodfood px-3 xs:px-0'>
+                           Existing account? </span></button>
                       
                   </div>
                 </div>

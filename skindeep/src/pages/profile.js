@@ -82,34 +82,38 @@ function Profile() {
     return (
         
         <div className='' >
-            <Nav />
-            <div className='flex flex-col justify-center items-center font-Archivo text-center sm:text-xl xs:text-lg bg-sky bg-fixed h-screen p-5 overflow-auto' style={{backgroundImage: `url(${bg})`, height: '100%', backgroundSize: 'cover', backgroundRepeat: 'no-repeat'}} >
-                
             
-                    { quiztaken ? (
+            <div className='flex flex-col justify-center items-center font-Archivo text-center sm:text-xl xs:text-lg bg-sky bg-fixed h-screen p-5 overflow-auto' style={{backgroundImage: `url(${bg})`, height: '100%', backgroundSize: 'cover', backgroundRepeat: 'no-repeat'}} >
+            <Nav /> 
+            
+                    { user ? (
                         <>  
+                        {quiztaken ? (<>
                             <div className='flex flex-col items-center mt-5 h-screen xs:w-5/6 sm:w-full'>
                                 <h1 className='font-ggoodfood text-pink-700'>Welcome {username}!</h1>
                                 <div>
                                     <h2 className='xs:text-sm p-2 sm:text-lg'>Here are some product recommendations for you based on your quiz results:</h2>
-                                    <p className='xs:text-sm p-2 sm:text-lg' >Feel free to re-do the quiz to change your skin profile and recommendations</p>
+                                    <p className='xs:text-sm p-2 sm:text-lg' >Feel free to re-do the <Link to='/quiz' className='text-white underline'>quiz</Link> to change your skin profile and recommendations</p>
                                         <div className='md:w-[760px] xs:w-[300px] lg:w-[900px] sm:w-[580px] bg-webpink p-4 rounded-xl' >
                                             <Products />
                                         </div>
                                     
                                 </div>
                             </div>
+                            </>) : (
+                                <div>
+                                <h1 className='text-lg p-20'>Take our skin quiz to get product recommendations!</h1>
+                                <button className='w-64 h-12 bg-webpink text-slate-700 hover:bg-pink-600 rounded-xl'><Link to="/quiz"className='text-slate-700'>Quiz</Link></button>
+                                </div>
+                            )}
+                            
                         </>
                     ) : (
                         <div className='flex flex-col justify-center items-center h-screen bg-no-repeat bg-center bg-contain rounded-xl bg-none-xs'
-                        style={{backgroundImage: `url(${webpage})`, marginTop: '5'}}>
-                            {
-                            user ? (<>
-                                <h1 className='text-lg p-20'>Take our skin quiz to get product recommendations!</h1>
-                                <button className='w-64 h-12 bg-webpink text-slate-700 hover:bg-pink-600 rounded-xl'><Link to="/quiz"className='text-slate-700'>Quiz</Link></button>
-                            </>) : (
-                                <h1 className='text-lg p-20'>Please log in</h1>
-                            )}
+                        style={{backgroundImage: `url(${webpage})`}}>
+                            
+                                <h1 className='text-lg p-20'>Please log in to see your skincare recommendations!</h1>
+                            
                         </div>
                         
                     )}

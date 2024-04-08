@@ -11,7 +11,7 @@ function Info() {
     const [prods, setProds] = useState([]);
 
     useEffect(() => {
-        axios.post('http://localhost:8800/prods', {id: id}) 
+        axios.get(`http://localhost:8800/prods/${id}`) 
         .then((res) => {
             setProds(res.data);
         })
@@ -23,8 +23,9 @@ function Info() {
 
     return (
         <div className='' >
-            <Nav />
+            
             <div className='flex flex-col justify-center items-center font-Archivo text-center sm:text-xl xs:text-lg bg-sky bg-fixed h-screen p-5 overscroll-contain' style={{backgroundImage: `url(${bg})`, height: '100vh',   backgroundSize: 'cover'}} >
+            <Nav />
                 <div className='flex justify-center items-center rounded-xl bg-none-xs'>
                         <div className='flex flex-col w-5/6 p-4 rounded-2xl border-dashed border-8 border-webpink bg-white m-auto'>
                             <div className='flex flex-col mb-5'>

@@ -9,7 +9,7 @@ function Analysis({ cream, openModal }) {
     const [loading, setLoading] = useState(false);
     
     useEffect(() => {
-        axios.post('http://localhost:8800/ings', {id: cream.id}) 
+        axios.get(`http://localhost:8800/ings/${cream.id}`) 
         .then((res) => {
             setResults(res.data);
             console.log(res.data);
@@ -21,13 +21,13 @@ function Analysis({ cream, openModal }) {
     useEffect(() => { 
         if (results.length > 0) {
             setLoading(false);
+            console.log(results);
       }
       console.log(results);
     }, [results]);
 
     return (
         <>
-          
           <div
               className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
             >
@@ -46,7 +46,7 @@ function Analysis({ cream, openModal }) {
                                 return <div key={ing.key} className='flex flex-row flex-wrap items-center xs:justify-center m-5 divide-y divide-slate-300 rounded-xl bg-white text-right p-5 xs:text-xs'>
                                     
                                 <li className='flex flex-col w-3/4 xs:text-center sm:text-left mx-5 p-5'>
-                                        <h3 className=" xs:text-lg sm:text-xl font-semibold ">{ing.name}</h3>
+                                        <h3 className=" xs:text-lg sm:text-xl font-semibold">{ing.name}</h3>
                                         <p className ="text-gray-800 ">{ing.info}</p>  
                                     </li>
                                     
@@ -63,10 +63,10 @@ function Analysis({ cream, openModal }) {
                   <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
                     
                     <button className='flex flex-row px-2 py-4 border-2 text-white tracking-wide justify-between items-center h-full rounded-lg bg-blue-600 hover:bg-pink-600' type="button"
-                        onClick={() => openModal()}><img className='h-10 w-10 xs:h-4 xs:w-4'src={heart} />
+                        onClick={() => openModal()}>
                         <span className='font-Archivo px-3 xs:px-0'>
                            close </span>
-                           <img className='h-10 w-10 xs:h-4 xs:w-4'src={heart} /></button>
+                        </button>
                       
                   </div>
                 </div>
@@ -74,9 +74,6 @@ function Analysis({ cream, openModal }) {
             </div>
             <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
           </>
-          
-      
-          
     );
 
 }
