@@ -11,10 +11,10 @@ hyperIng = ["azelaic", "niacinamide", "apple cider vinegar", "grapeseedoil","vit
 redIng = ["aloe", "apricot kernel", "amino", "avocado", "almond", "argan", "niacinamide", "camellia", "resveratrol", "azulene", "borage", "cannabidiol", "q10", "glycerin", "grapeseedoil", "vitis vinifera", "cortisone", "honey", "marshmallow", "zinc", "centella asiatica", "snail mucin", "soy", "camellia oleifera", "cucumber", "watermelon", "beeswax"]
 texIng = ["vitamin a", "allantoin", "aluminum dihydroxy allantoinate", "bakuchiol", "glycolic", "citric", "lactic", "malic", "retinol", "retinal", "retinyl", "salicylic", "lime pearl"]
 acneAvoid = ["apricot kernel", "avocado", "olive", "oxybenzone", "alcohol denat", "vite", "eucalyptus","petroleum jelly", "dimethicone", "mineral", "paraffinum liquidum", "petrolatum", "cyclopentasiloxane", "cetyl acetate", "lauric", "linseed", "cocoa", "algae", "zinc oxide"]
-barrier = ["lactobacillus", "apricot kernel", "avocado", "capric triglyceride", "astaxanthin", "resveratrol", "azulene", "beta-glucan", "ceramide", "sphingosine", "hyaluronic", "glycerin", "honey", "isododecane","lactococcus", "matrixy", "centella asiatica", "snail mucin", "soy", "rosehip", "oat", "panthenol", "pantothenic", "ethyl linoleate", "chia", "stearic", "marula", "cucumber", "barley", "hordeum vulgare", "sesame"]
+barrier = ["ceramide", "tocopherol", "glyceryl stearate", "lactobacillus", "apricot kernel", "avocado", "capric triglyceride", "astaxanthin", "resveratrol", "azulene", "beta-glucan", "ceramide", "sphingosine", "hyaluronic", "glycerin", "honey", "isododecane","lactococcus", "matrixy", "centella asiatica", "snail mucin", "soy", "rosehip", "oat", "panthenol", "pantothenic", "ethyl linoleate", "chia", "stearic", "marula", "cucumber", "barley", "hordeum vulgare", "sesame"]
 dryAvoid = ["witch","alcohol denat", "alpha-hydroxy acid", "apple cider vinegar", "acetic", "bentonite", "salicylic", "eucalyptus", "hemp", "kaolin", "damascena", "cyclopentasiloxane"]
-sensIng = ["aloe", "glycerin", "ceramide", "capric triglyceride", "ceramide", "glycerin", "greentea", "oatmeal"]
-sensAvoid = ["lactic", "glycolic", "alcohol", "ethanol", "parfum", "fragrance" "benzoyl peroxide", "citric", "salicylic", "retinol", "sulfate", "sulphate"]
+sensIng = ["ceramide", "aloe", "glycerin", "ceramide", "capric triglyceride", "ceramide", "glycerin", "greentea", "oatmeal", "centella asiatica"]
+sensAvoid = ["lactic", "glycolic", "ethanol", "parfum", "fragrance" "benzoyl peroxide", "citric", "salicylic", "retinol", "sulfate", "sulphate"]
 normAvoid = ["methylparaben", "propylparaben", "butylparaben", "thylparaben", "paraffinum liquidum", "petrolatum", "mineral oil", "formaldehyde", "chromotropic", "methenamine"]
 combiIng = ["superoxidedis", "hyaluronic", "lactic", "peptide", "squalane", "glycolic", "ceramide", "panthenol", "niacinamide", "jojoba", "ceramide", "glycerin", "centella asia"]
 
@@ -88,11 +88,11 @@ def label():
     for ing in barrier:
       if ing.lower() in data.loc[i, "Ingredients"].lower():
         data.loc[i, "barrier"] = 2
-        data.loc[i, "Dry"] = 1
+        data.loc[i, "Dry"] = 2
       
     for ing in sensIng:
       if ing.lower() in data.loc[i, "Ingredients"].lower():
-        data.loc[i, "Sensitive"] = 1
+        data.loc[i, "Sensitive"] = 2
 
     for ing in sensAvoid:
       if ing.lower() in data.loc[i, "Ingredients"].lower():
@@ -100,8 +100,8 @@ def label():
 
     for ing in combiIng:
       if ing.lower() in data.loc[i, "Ingredients"].lower():
-        data.loc[i, "Combination"] = 1
-        data.loc[i, "Normal"] = 1
+        data.loc[i, "Combination"] = 2
+        data.loc[i, "Normal"] = 2
         
   # wrtite to csv and json
   data.to_csv('cosmetics_mod.csv', index=False)

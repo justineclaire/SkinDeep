@@ -1,4 +1,5 @@
 import sys
+import subprocess
 import numpy as np
 import pandas as pd
 from cleanUser import cleanUser
@@ -6,6 +7,7 @@ import joblib
 '''Predicts skin concerns based on user inputted ingredients'''
 
 ingredients = sys.argv[1]
+
 
 # clean user input
 ingredients = ingredients.lower()
