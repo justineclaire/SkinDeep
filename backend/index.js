@@ -5,6 +5,7 @@ import cors from "cors"
 import recs from "./recs.js";
 import {metaphone} from 'metaphone'
 import showimg from "./prodimgs.js";
+import showlink from "./prodlinks.js";
 import fs from "fs";
 import getimgs from "./webscrapeimgs.js";
 
@@ -180,8 +181,40 @@ app.get("/prods/:id", (req, res) => {
 });
 
 
+function getProducts() {
+    return new Promise((resolve, reject) => {
+        const q = "SELECT Name, Brand FROM `products`";
+        db.query(q, (err, data) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(data);
+            }
+        });
+    });
+}
+
+async function getlinks() {
+    try {
+        const file = fs.createWriteStream('links3.txt');
+        let prods = await getProducts();
+        prods = prods.map(prod => prod.Name + " " + prod.Brand);
+        //let imgs = [];
+        for (const prod of prods.slice(1426)) {
+            const img = await showlink(prod);
+            file.write('"'+img+'",');
+            //imgs.push(img);
+        }
+        
+    } catch (err) {
+        console.error(err);
+    }
+}
+
+
 app.listen(8800, () => {
     console.log("Backend server is running!")
+    //getlinks()
     //getimgs()
     
 })
