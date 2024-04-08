@@ -31,6 +31,7 @@ function Products() {
                         <h3 className=" xs:text-lg sm:text-xl font-semibold ">{cream.Name}</h3>
                         <p className ="text-gray-800 ">{cream.Brand}</p>
                         <button onClick={() => openModal(cream)} className='bg-pink-700 w-1/2 text-white rounded-lg p-2'>More Info</button>  
+                        <a href={cream.Link} target="_blank"><button className='bg-pink-700 w-1/2 text-white rounded-lg p-2 mt-2'>Buy me</button></a>
                     </div>
                 </div>
             ))
@@ -47,6 +48,7 @@ function Products() {
                         <h3 className=" xs:text-lg sm:text-xl font-semibold ">{cream.Name}</h3>
                         <p className ="text-gray-800 ">{cream.Brand}</p>  
                         <button onClick={() => openModal(cream)} className='bg-pink-700 w-1/2 text-white rounded-lg p-2'>More Info</button>  
+                        <a href={cream.Link} target="_blank"><button className='bg-pink-700 w-1/2 text-white rounded-lg p-2 mt-2'>Buy me</button></a>
                     </div>
                 </div>
             ))}
@@ -61,6 +63,7 @@ function Products() {
                         <h3 className=" xs:text-lg sm:text-xl font-semibold ">{cleanser.Name}</h3>
                         <p className ="text-gray-800 ">{cleanser.Brand}</p>  
                         <button onClick={() => openModal(cleanser)} className='bg-pink-700 w-1/2 text-white rounded-lg p-2'>More Info</button>  
+                        <a href={cleanser.Link} target="_blank"><button className='bg-pink-700 w-1/2 text-white rounded-lg p-2 mt-2'>Buy me</button></a>
                     </div>
                 </div>
             ))}
@@ -74,7 +77,8 @@ function Products() {
                             <div className='flex flex-col w-3/4 xs:text-center sm:text-left mx-5 p-5'>
                                 <h3 className=" xs:text-lg sm:text-xl font-semibold ">{sunscreen.Name}</h3>
                                 <p className ="text-gray-800 ">{sunscreen.Brand}</p> 
-                                <button onClick={() => openModal(sunscreen)} className='bg-pink-700 w-1/2 text-white rounded-lg p-2'>More Info</button>   
+                                <button onClick={() => openModal(sunscreen)} className='bg-pink-700 w-1/2 text-white rounded-lg p-2'>More Info</button> 
+                                <a href={sunscreen.Link} target="_blank"><button className='bg-pink-700 w-1/2 text-white rounded-lg p-2 mt-2'>Buy me</button></a>  
                             </div>
                         </div>
                     ))}
@@ -91,6 +95,7 @@ function Products() {
                         <h3 className=" xs:text-lg sm:text-xl font-semibold ">{cream.Name}</h3>
                         <p className ="text-gray-800 ">{cream.Brand}</p>  
                         <button onClick={() => openModal(cream)} className='bg-pink-700 w-1/2 text-white rounded-lg p-2'>More Info</button>  
+                        <a href={cream.Link} target="_blank"><button className='bg-pink-700 w-1/2 text-white rounded-lg p-2 mt-2'>Buy me</button></a>
                     </div>
                 </div>
             ))}
