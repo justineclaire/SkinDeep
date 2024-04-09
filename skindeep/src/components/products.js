@@ -131,7 +131,7 @@ function Products() {
     useEffect(() => {
         try {
             if(user.uid) {
-                axios.get(`http://localhost:8800/user/${uid}`)
+                axios.get(`${REACT_APP_BACKEND}/user/${uid}`)
                 .then(res => {
                     if (res.data.length > 0) {
                         setQuizTaken(true);
@@ -154,7 +154,7 @@ function Products() {
         try {
             if(quiztaken && user) {                
                 try{
-                    axios.get(`http://localhost:8800/recs/${uid}`)
+                    axios.get(`${REACT_APP_BACKEND}/recs/${uid}`)
                     .then(recs => {
                         setRecList(recs.data);
                         

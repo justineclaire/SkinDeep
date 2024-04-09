@@ -10,7 +10,7 @@ function Search() {
 
     useEffect(() => {
         if (search.length > 1) {
-            axios.get(`http://localhost:8800/search/${search}`)
+            axios.get(`${REACT_APP_BACKEND}/search/${search}`)
             .then((res) => {
                 setResults(res.data);
                 console.log(res.data);

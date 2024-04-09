@@ -8,18 +8,18 @@ import showimg from "./prodimgs.js";
 import showlink from "./prodlinks.js";
 import fs from "fs";
 import getimgs from "./webscrapeimgs.js";
+import connection from "./config.cjs";
 
 const app = express()
-app.use(cors())
-app.use(express.json())
+//app.use(cors())
 
-// database connections and methods
-const db = mysql.createConnection({
-    host: "localhost",
-    user: 'root',
-    password: '',
-    database: 'skinDB'
-})
+//const { connection } = require("./config.cjs");
+const corsOptions ={
+    origin:'https://skindeepfyp.netlify.app', 
+    credentials:true,            //access-control-allow-credentials:true
+    optionSuccessStatus:200
+}
+app.use(cors(corsOptions));
 
 app.use(express.json())
 
@@ -30,8 +30,8 @@ app.get("/", (req, res) => {
 app.get("/user/:uid", (req, res) => {
     const q = "SELECT * FROM `users` WHERE `id` = ?";
     const uid = req.params.uid;
-    //console.log(req.params.uid);
-    db.query(q, uid, (err, data)=>{
+    
+    connection.query(q, uid, (err, data)=>{
         if(err) return res.json("error can't find user, do the quiz!");
         return res.json(data);
     })
@@ -43,15 +43,15 @@ app.get("/recs/:uid", (req, res) => {
     const uid = req.params.uid;
     const q2 = "SELECT * FROM `users` WHERE `id` = ?";
 
-    db.query(q, (err, data)=>{
+    connection.query(q, (err, data)=>{
         if(err) return res.json(err);
         const prods = data;
 
         
-        db.query(q2, uid, (err, data) => {
+        connection.query(q2, uid, (err, data) => {
             if(err) return res.json(err);
             const user = data;
-            //console.log(user);
+            
             try {
                 const reclist = recs(prods, user);
                 return res.json(reclist);
@@ -82,9 +82,8 @@ app.put("/createprof", (req, res) => {
         req.body.hyper,
         req.body.name
     ] 
-    console.log(req.body.skintype);
-    console.log(q);
-    db.query(q, [info], (err, data)=>{
+     
+    connection.query(q, [info], (err, data)=>{
         if(err) return res.json(err);
         return res.json(data);
     });
@@ -151,9 +150,8 @@ app.get("/search/:search", (req, res) => {
       return res.status(400).json({ err: "No special characters and no numbers, please!"})
     }
     
-    db.query(q, [search, searchLike], (err, data)=>{
+    connection.query(q, [search, searchLike], (err, data)=>{
         if(err) console.log(err);
-        //console.log(data);
         return res.json(data);
     });
 });
@@ -162,8 +160,9 @@ app.get("/search/:search", (req, res) => {
 app.get("/ings/:pid", (req, res) => {
     const q = "SELECT `name`, `info` FROM `ingredients` I JOIN `prod_ing` X ON X.ingid = I.id WHERE X.productid = ?";
     const pid = req.params.pid;
-   console.log(pid);
-    db.query(q, pid, (err, data)=>{
+    console.log(pid);
+    connection.query(q, pid, (err, data)=>{
+
         if(err) return res.json(err);
         return res.json(data);
     });
@@ -172,13 +171,16 @@ app.get("/ings/:pid", (req, res) => {
 //product info
 app.get("/prods/:id", (req, res) => {
     const q = "SELECT `id`, `Name`, `Brand`, `img` FROM `products` P JOIN `prod_ing` X ON X.productid = P.id WHERE X.ingid = ?";
+
     const id = req.params.id;
     //console.log(ing);
-    db.query(q, id, (err, data)=>{
+   
+    connection.query(q, id, (err, data)=>{
         if(err) return res.json(err);
         return res.json(data);
     });
 });
+
 
 
 function getProducts() {
@@ -212,9 +214,18 @@ async function getlinks() {
 }
 
 
-app.listen(8800, () => {
+/*app.listen(8800, () => {
     console.log("Backend server is running!")
     //getlinks()
     //getimgs()
     
-})
+})*/
+
+// Use PORT provided in environment or default to 3000
+const port = process.env.PORT || 3000;
+
+// Listen on `port` and 0.0.0.0
+app.listen(port, "0.0.0.0", function () {
+  // ...
+});
+

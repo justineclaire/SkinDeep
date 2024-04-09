@@ -48,10 +48,11 @@ function Quiz() {
         };
     }, []);
 
+    //check if user has skin profile already
     useEffect(() => {
         try {
             if(user) {
-                axios.get(`http://localhost:8800/user/${user.uid}`)
+                axios.get(`${REACT_APP_BACKEND}/user/${user.uid}`)
                 .then(res => {
                     if (res.data.length > 0) {
                         setQuizTaken(true);
@@ -106,7 +107,7 @@ function Quiz() {
         e.preventDefault();
     
         console.log(userResponses);
-        axios.put('http://localhost:8800/createprof', userResponses) 
+        axios.put(`${REACT_APP_BACKEND}/createprof`, userResponses) 
         .then((res) => {
         navigate('/profile');
         console.log(res)
@@ -132,7 +133,7 @@ function Quiz() {
         }
         // Check if updatedResponses is not empty
         if (Object.keys(updatedResponses).length !== 0) {
-            axios.post('http://localhost:8800/updateprof', updatedResponses)
+            axios.post(`${REACT_APP_BACKEND}/updateprof`, updatedResponses)
             .then((res) => {
                 navigate('/profile');
                 console.log(res);
