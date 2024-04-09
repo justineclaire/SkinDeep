@@ -11,20 +11,20 @@ from sklearn.model_selection import train_test_split
 import joblib
 
 # clean ingredients and label ingredients
-cleaning()
+#m cleaning()
 label()
 data = pd.read_csv("cosmetics_mod.csv")
 
 # format ingredients again just in case
-data["Ingredients"] = data["Ingredients"].str.replace("[*()\s.+-]", "", regex=True)
+data["Ingredients"] = data["Ingredients"].str.replace("[*()\\s.+-]", "", regex=True)
 data["Ingredients"] = data["Ingredients"].str.lower()
 
 # One-Hot Encoding
 ingredients_dummies=data["Ingredients"].str.get_dummies(',')
 encoded_columns = ingredients_dummies.columns.tolist()
 
-ingtest = pd.DataFrame(ingredients_dummies, columns=encoded_columns)
-ingtest.to_csv('ingredients.csv', index=False)
+#ingtest = pd.DataFrame(ingredients_dummies, columns=encoded_columns)
+#ingtest.to_csv('ingredients.csv', index=False)
 
 # Drop the columns that are not labels
 columns_to_drop = ["Label", "Ingredients", "Brand", "Name", "Price", "Rank"]
@@ -36,9 +36,7 @@ X = ingredients_dummies
 x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 # Train the model
-rf = RandomForestClassifier(max_depth=2, n_estimators=30,
-    min_samples_split=3, max_leaf_nodes=5,
-    random_state=22)
+rf = RandomForestClassifier(max_depth=18, n_estimators=150, random_state=22)
 trainedModel = rf.fit(x_train, y_train)
 
 def getCols():

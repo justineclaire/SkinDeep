@@ -11,6 +11,7 @@ ingredients = sys.argv[1]
 
 # clean user input
 ingredients = ingredients.lower()
+ingredients = ingredients.replace(" ", "")
 ings = ingredients.split(",")
 ings = cleanUser(ings)
 
@@ -22,7 +23,7 @@ input = np.array([], dtype=int)
 
 # format ingredients again just in case and get column headings
 data = pd.read_csv("cosmetics_mod.csv")
-data["Ingredients"] = data["Ingredients"].str.replace("[*()\s.+-]", "", regex=True)
+data["Ingredients"] = data["Ingredients"].str.replace("[*()\\s.+-]", "", regex=True)
 data["Ingredients"] = data["Ingredients"].str.lower()
 
 # One-Hot Encoding

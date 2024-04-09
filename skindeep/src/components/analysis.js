@@ -9,7 +9,7 @@ function Analysis({ cream, openModal }) {
     const [loading, setLoading] = useState(false);
     
     useEffect(() => {
-        axios.get(`${process.env.REACT_APP_BACKEND}/ings/${cream.id}`) 
+        axios.get(`http://localhost:8800/ings/${cream.id}`) 
         .then((res) => {
             setResults(res.data);
             console.log(res.data);

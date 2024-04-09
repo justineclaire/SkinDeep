@@ -109,11 +109,9 @@ function Login() {
     return(
       <div className='flex flex-row'>
         <div id='profbtn' className='mx-10'>
-
               <button className='flex flex-row xs:px-2 xs:py-2 md:px-7 md:py-5 text-white tracking-wide justify-between items-center h-full rounded-lg bg-pink-600 hover:bg-pink-100' >
                 <Link to='/profile' className='flex text-white items-center'>
               <span className='font-ggoodfood px-3 xs:px-0'>  My Profile  </span>
-
               </Link></button>
         </div>
       
