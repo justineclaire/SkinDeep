@@ -25,10 +25,9 @@ export default function recs(prods, user) {
     }
     
 
-    if(user[0].skinype === "Oily") {
+    if(user[0].skintype === "Oily") {
         //user direct input
         weights.Oily = 3;
-        weights.Dry = 0;
 
         //enemies of oily skin
         weights.Dry = 0;
@@ -55,9 +54,7 @@ export default function recs(prods, user) {
         weights.acne = 0;
 
         //friends of sensitive skin
-        weights.Dry = 1.5;
         weights.barrier = 1.5;
-        weights.red = 1.5;
     }
 
     if(user[0].bh === 1) {
@@ -84,7 +81,6 @@ export default function recs(prods, user) {
 
         //enemies of age
         weights.Oily = 0;
-        
     }
 
     if(user[0].bright === 1) {
@@ -100,14 +96,15 @@ export default function recs(prods, user) {
         weights.red = 3;
 
         //friends of red
-        weights.Dry = 1.5;
         weights.barrier = 1.5;
-        weights.Sens = 1.5;
     }
 
     if(user[0].tex === 1) {
         //user direct input
         weights.tex = 3;
+
+        //enemies
+        weights.Dry = 0;
     }
 
     if(user[0].barrier === 1) {
@@ -115,7 +112,6 @@ export default function recs(prods, user) {
         weights.barrier = 3;
 
         //friends of barrier
-        weights.Dry = 1.5;
         weights.red = 1.5;
         weights.Sens = 1.5;
     }
@@ -129,9 +125,11 @@ export default function recs(prods, user) {
     }
 
 
+    //calculate score by multiplying classes by weights
     for (let i = 0; i < prods.length; i++) {
         prods[i].score =(prods[i].Sens * weights.Sens) + (prods[i].acne * weights.acne) + (prods[i].age * weights.age) + (prods[i].bright * weights.bright) + (prods[i].bh * weights.bh) + (prods[i].red * weights.red) + (prods[i].tex * weights.tex) + (prods[i].barrier * weights.barrier) + (prods[i].hyper * weights.hyper) + (prods[i].Oily * weights.Oily) + (prods[i].Dry * weights.Dry) + (prods[i].Combi * weights.Combination) + (prods[i].Normal * weights.Normal);
     }
+    
 
     prods = prods.sort((a, b) => {
         return b.score - a.score;

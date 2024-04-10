@@ -72,7 +72,7 @@ for i in range(len(pred_data)):
         if df_pred.iloc[i][j] == df_real.iloc[i][j]:
             correct += 1
             spec[j][0] += 1
-            # print(df_pred.iloc[i][j], df_real.iloc[i][j])
+            
         else:
             false += 1
             spec[j][1] += 1

@@ -33,6 +33,19 @@ function Quiz() {
         barrier: null,
         hyper: null
     });
+    let updatedResponses = {
+        skintype: userResponses.skintype,
+        sensitive: userResponses.sensitive,
+        acne: userResponses.acne,
+        age: userResponses.age,
+        bright: userResponses.bright,
+        bh: userResponses.bh,
+        red: userResponses.red,
+        tex: userResponses.tex,
+        barrier: userResponses.barrier,
+        hyper: userResponses.hyper,
+        uid: userResponses.uid
+    };
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -50,22 +63,7 @@ function Quiz() {
 
     //check if user has skin profile already
     useEffect(() => {
-        try {
-            if(user) {
-                axios.get(`${REACT_APP_BACKEND}/user/${user.uid}`)
-                .then(res => {
-                    if (res.data.length > 0) {
-                        setQuizTaken(true);
-                    } else {
-                        setQuizTaken(false);
-                    }
-                    
-                })
-            }
-        } catch (error) {
-            console.log(error);
-            console.log("from profile.js")
-        }
+        
         
     }, [user]); 
    
@@ -104,45 +102,40 @@ function Quiz() {
     };
 
     const submit = async (e) => {
+
         e.preventDefault();
-    
-        console.log(userResponses);
-        axios.put(`${REACT_APP_BACKEND}/createprof`, userResponses) 
-        .then((res) => {
-        navigate('/profile');
-        console.log(res)
-        })
-        .catch((err) => console.log(err));
+        try {
+            if(user) {
+                axios.get(`${REACT_APP_BACKEND}/user/${user.uid}`)
+                .then(res => {
+                    if (res.data.length > 0) {
+                        setQuizTaken(true);
+                        axios.post(`${REACT_APP_BACKEND}/updateprof`, updatedResponses)
+                        .then((res) => {
+                            navigate('/profile');
+                            console.log(res);
+                        })
+                        .catch((err) => console.log(err));
+                    } else {
+                        setQuizTaken(false);
+
+                        axios.put(`${REACT_APP_BACKEND}/createprof`, userResponses) 
+                        .then((res) => {
+                        navigate('/profile');
+                        console.log(res)
+                        })
+                        .catch((err) => console.log(err));
+                    }
+                    
+                })
+            }
+        } catch (error) {
+            console.log(error);
+            console.log("from profile.js")
+        }
         
     }
 
-    const update = async (e) => {
-        e.preventDefault();
-        let updatedResponses = {
-            skintype: userResponses.skintype,
-            sensitive: userResponses.sensitive,
-            acne: userResponses.acne,
-            age: userResponses.age,
-            bright: userResponses.bright,
-            bh: userResponses.bh,
-            red: userResponses.red,
-            tex: userResponses.tex,
-            barrier: userResponses.barrier,
-            hyper: userResponses.hyper,
-            uid: userResponses.uid
-        }
-        // Check if updatedResponses is not empty
-        if (Object.keys(updatedResponses).length !== 0) {
-            axios.post(`${REACT_APP_BACKEND}/updateprof`, updatedResponses)
-            .then((res) => {
-                navigate('/profile');
-                console.log(res);
-            })
-            .catch((err) => console.log(err));
-        } else {
-            console.log("updatedResponses is empty");
-        }
-    }
 
     
 return (
@@ -205,7 +198,7 @@ return (
                             <button 
                                 className='rounded-xl w-64 h-12 bg-webpink'
                                 type='submit'
-                                onClick={quiztaken ? (e) => update(e) : (e) => submit(e)}
+                                onClick={(e) => submit(e)}
                             >
                             Submit 
                             </button >
