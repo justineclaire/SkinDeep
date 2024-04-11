@@ -2,12 +2,11 @@ import sys
 import subprocess
 import numpy as np
 import pandas as pd
-from cleanUser import cleanUser
+from methods.cleanUser import cleanUser
 import joblib
 '''Predicts skin concerns based on user inputted ingredients'''
 
 ingredients = sys.argv[1]
-
 
 # clean user input
 ingredients = ingredients.lower()
@@ -38,7 +37,6 @@ for ing in encoded_columns:
 input = np.array([input])
 
 # get columns from training data
-
 cols = encoded_columns
 input_df = pd.DataFrame(input, columns=cols)
 

@@ -2,12 +2,10 @@ import express from "express"
 import mysql from "mysql"
 import { spawn } from 'child_process';
 import cors from "cors"
-import recs from "./recs.js";
-import {metaphone} from 'metaphone'
-import showimg from "./prodimgs.js";
-import showlink from "./prodlinks.js";
+import recs from "./methods/recs.js";
+import showimg from "./webscraping/prodimgs.js";
+import showlink from "./webscraping/prodlinks.js";
 import fs from "fs";
-import getimgs from "./webscrapeimgs.js";
 
 const app = express()
 app.use(cors())
@@ -21,7 +19,6 @@ const db = mysql.createConnection({
     database: 'skinDB'
 })
 
-app.use(express.json())
 
 app.get("/", (req, res) => {
     res.json("hello this is the backend")
@@ -39,7 +36,7 @@ app.get("/user/:uid", (req, res) => {
 
 //get product recommendations
 app.get("/recs/:uid", (req, res) => {
-    const q = "SELECT * FROM `productsnew`";
+    const q = "SELECT * FROM `products`";
     const uid = req.params.uid;
     const q2 = "SELECT * FROM `users` WHERE `id` = ?";
 
@@ -194,6 +191,25 @@ function getProducts() {
     });
 }
 
+//get image links for product table
+async function getimgs() {
+    try {
+        const file = fs.createWriteStream('imglinks2.txt');
+        let prods = await getProducts();
+        prods = prods.map(prod => prod.Name + " " + prod.Brand);
+        
+        for (const prod of prods.slice(1456)) {
+            const img = await showimg(prod);
+            file.write('"'+img+'",');
+            
+        }
+        
+    } catch (err) {
+        console.error(err);
+    }
+}
+
+//get shopping links for product table
 async function getlinks() {
     try {
         const file = fs.createWriteStream('links3.txt');
@@ -211,10 +227,12 @@ async function getlinks() {
     }
 }
 
-
 app.listen(8800, () => {
     console.log("Backend server is running!")
-    //getlinks()
-    //getimgs()
+
+    //call webscraping functions once on start
+        //getlinks()
+        //getimgs()
     
 })
+

@@ -1,6 +1,6 @@
 import pandas as pd
 ''' Clean ingredients list in cosmetics.csv'''
-data = pd.read_csv("cosmetics_mod.csv")
+data = pd.read_csv("../cosmetics_mod.csv")
 
 def cleaning():
     for i in range(len(data["Ingredients"])):
@@ -152,4 +152,4 @@ def cleaning():
             
 
 cleaning()
-data.to_csv("cosmetics_mod.csv", index=False)
+data.to_csv("../cosmetics_mod.csv", index=False)

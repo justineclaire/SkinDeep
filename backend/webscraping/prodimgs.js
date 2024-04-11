@@ -1,5 +1,4 @@
 import puppeteer from 'puppeteer';
-
 async function showimg(name) {
 
   const browser = await puppeteer.launch({ headless: true, slowMo: 100 })
@@ -14,7 +13,6 @@ async function showimg(name) {
   //in case we encounter a page without images or an error
   try {
     await page.goto(url)
-
     //make sure the page is loaded and contain our targeted element
     await page.waitForNavigation()
     await page.waitForSelector('.tile--img__media')
@@ -39,8 +37,7 @@ async function showimg(name) {
     )
     browser.close();
     return link;
-    //console.log('link succesfully retrieved:', link)
-    //console.log('=====')
+    
   } catch (e) {
     console.log(e)
   }
