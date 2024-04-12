@@ -1,13 +1,14 @@
 import pandas as pd
 import numpy as np
-from label import acneIng, wrinklesIng, brightIng, bhIng, hyperIng, redIng, texIng, acneAvoid, barrier, dryAvoid, sensIng, sensAvoid, normAvoid, combiIng
+from backend.methods.label import acneIng, wrinklesIng, brightIng, bhIng, hyperIng, redIng, texIng, acneAvoid, barrier, dryAvoid, sensIng, sensAvoid, normAvoid, combiIng
 
-data = pd.read_csv("cosmetics_mod.csv")
+data = pd.read_csv("../cosmetics_mod.csv")
 
 '''This file is used to filter through the ingredients to create an 
     ingredients csv and join file to populate my database (will manually type descriptions)'''
 
-ing_list = acneIng + wrinklesIng + brightIng + bhIng + hyperIng + redIng + texIng + acneAvoid + barrier + dryAvoid + sensIng + sensAvoid + normAvoid + combiIng
+ing_list = acneIng + wrinklesIng + brightIng + bhIng + hyperIng + redIng + texIng + acneAvoid + barrier 
++ dryAvoid + sensIng + sensAvoid + normAvoid + combiIng
 ing_list = np.unique(ing_list)
 cols = ["id", "name", "info"]
 ing_df = pd.DataFrame(columns=cols)
@@ -28,5 +29,6 @@ for i in range(len(data)):
                 # test
                 # print("product: ", i+1, data.loc[i, "Name"])
 
-ing_df.to_csv("ingredients.csv", index=False)
+ing_df.to_csv("ingredientslist.csv", index=False)
 prod_ing.to_csv("product_ingredients.csv", index=False)
+

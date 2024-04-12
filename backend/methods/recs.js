@@ -127,7 +127,10 @@ export default function recs(prods, user) {
 
     //calculate score by multiplying classes by weights
     for (let i = 0; i < prods.length; i++) {
-        prods[i].score =(prods[i].Sens * weights.Sens) + (prods[i].acne * weights.acne) + (prods[i].age * weights.age) + (prods[i].bright * weights.bright) + (prods[i].bh * weights.bh) + (prods[i].red * weights.red) + (prods[i].tex * weights.tex) + (prods[i].barrier * weights.barrier) + (prods[i].hyper * weights.hyper) + (prods[i].Oily * weights.Oily) + (prods[i].Dry * weights.Dry) + (prods[i].Combi * weights.Combination) + (prods[i].Normal * weights.Normal);
+        prods[i].score =(prods[i].Sens * weights.Sens) + (prods[i].acne * weights.acne) + (prods[i].age * weights.age)
+         + (prods[i].bright * weights.bright) + (prods[i].bh * weights.bh) + (prods[i].red * weights.red) + (prods[i].tex * weights.tex) 
+         + (prods[i].barrier * weights.barrier) + (prods[i].hyper * weights.hyper) + (prods[i].Oily * weights.Oily) 
+         + (prods[i].Dry * weights.Dry) + (prods[i].Combi * weights.Combination) + (prods[i].Normal * weights.Normal);
     }
     
 

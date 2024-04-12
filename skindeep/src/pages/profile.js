@@ -69,7 +69,7 @@ function Profile() {
                             setRecList(recs.data);
                         })
                     }catch(error) {
-                        console.log("ahhh recs axios error");
+                        console.log(" recs axios error");
                     }
                     
                 }

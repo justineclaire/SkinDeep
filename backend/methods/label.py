@@ -1,7 +1,7 @@
 import pandas as pd
 
 ''' Label cosmetics.csv with label encoded tags based on ingredients'''
-data = pd.read_csv("cosmetics_mod.csv")
+data = pd.read_csv("../cosmetics_mod.csv")
 
 acneIng = ["witch", "amoxicillin", "azelaic", "niacinamide", "niacin", "citric", "vitc", "tartaric", "apple cider vinegar", "benzoyl peroxide", "cumin", "bentonite", "citric", "lactic", "malic", "retinol", "retinal", "retinyl", "salicylic", "hydrogen peroxide", "hemp", "cortisone", "honey", "kaolin", "magnesium", "mandelic", "zinc", "honey", "lactococcus", "centella asia", "succinic", "tretinoin", "turmeric", "damascena", "vitamin a"]
 wrinklesIng = ["tocopherol", "vitamin a", "caffeine", "arbutin", "bakuchiol", "ferulic", "vitc", "argireline", "glycolic", "citric", "lactic", "malic", "cumin", "caviar", "sodium hyaluronate", "retinol", "retinal", "retinyl", "peptide", "ceramide", "sphingosine", "hyaluronic", "glycerin", "mandelic", "squalane", "squalene", "matrixy", "centella asiatica", "sodium hyaluronate", "soy", "rosehip", "turmeric", "seaweed", "rubus"]
@@ -108,4 +108,4 @@ def label():
         data.loc[i, "Normal"] = 2
         
   # wrtite to csv and json
-  data.to_csv('cosmetics_mod.csv', index=False)
+  data.to_csv('../cosmetics_mod.csv', index=False)

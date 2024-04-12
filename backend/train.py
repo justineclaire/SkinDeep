@@ -3,15 +3,15 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 # import cleaning functions
-from cleanIng import cleaning 
-from label import label
+from backend.methods.cleanIng import cleaning 
+from backend.methods.label import label
 # Modelling
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
 import joblib
 
 # clean ingredients and label ingredients
-#m cleaning()
+cleaning()
 label()
 data = pd.read_csv("cosmetics_mod.csv")
 
@@ -23,8 +23,8 @@ data["Ingredients"] = data["Ingredients"].str.lower()
 ingredients_dummies=data["Ingredients"].str.get_dummies(',')
 encoded_columns = ingredients_dummies.columns.tolist()
 
-#ingtest = pd.DataFrame(ingredients_dummies, columns=encoded_columns)
-#ingtest.to_csv('ingredients.csv', index=False)
+ingtest = pd.DataFrame(ingredients_dummies, columns=encoded_columns)
+ingtest.to_csv('ingredients.csv', index=False)
 
 # Drop the columns that are not labels
 columns_to_drop = ["Label", "Ingredients", "Brand", "Name", "Price", "Rank"]
