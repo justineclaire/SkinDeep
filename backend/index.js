@@ -6,7 +6,6 @@ import recs from "./methods/recs.js";
 import showimg from "./webscraping/prodimgs.js";
 import showlink from "./webscraping/prodlinks.js";
 import fs from "fs";
-import getimgs from "./webscrapeimgs.js";
 import connection from "./config.cjs";
 
 const app = express()
