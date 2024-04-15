@@ -106,11 +106,11 @@ function Quiz() {
         e.preventDefault();
         try {
             if(user) {
-                axios.get(`${REACT_APP_BACKEND}/user/${user.uid}`)
+                axios.get(`${process.env.REACT_APP_BACKEND}/user/${user.uid}`)
                 .then(res => {
                     if (res.data.length > 0) {
                         setQuizTaken(true);
-                        axios.post(`${REACT_APP_BACKEND}/updateprof`, updatedResponses)
+                        axios.post(`${process.env.REACT_APP_BACKEND}/updateprof`, updatedResponses)
                         .then((res) => {
                             navigate('/profile');
                             console.log(res);
@@ -119,7 +119,7 @@ function Quiz() {
                     } else {
                         setQuizTaken(false);
 
-                        axios.put(`${REACT_APP_BACKEND}/createprof`, userResponses) 
+                        axios.put(`${process.env.REACT_APP_BACKEND}/createprof`, userResponses) 
                         .then((res) => {
                         navigate('/profile');
                         console.log(res)

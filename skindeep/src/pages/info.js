@@ -11,7 +11,7 @@ function Info() {
     const [prods, setProds] = useState([]);
 
     useEffect(() => {
-        axios.get(`${REACT_APP_BACKEND}/prods/${id}`) 
+        axios.get(`${process.env.REACT_APP_BACKEND}/prods/${id}`) 
         .then((res) => {
             setProds(res.data);
         })
